@@ -23,6 +23,7 @@ class CallService: InCallService() {
             (applicationContext as EnvelopeCallApp).callState.postValue(
                 when(newState) {
                     Call.STATE_ACTIVE -> CallState.Active(call)
+                    Call.STATE_RINGING -> CallState.Ringing(call)
                     Call.STATE_DIALING -> CallState.Dialing(call)
                     Call.STATE_DISCONNECTED -> CallState.Default
                     else -> CallState.Default
