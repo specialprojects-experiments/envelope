@@ -143,7 +143,8 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/dial_accept"
+            android:id="@+id/call"
+            android:background="@drawable/call_button_state"
             android:layout_marginTop="24dp"
             style="@style/DialButton"
             android:layout_gravity="center_horizontal"
@@ -151,7 +152,7 @@
             android:layout_height="@dimen/button_size" />
 
         <Button
-            android:id="@+id/hangup_refuse"
+            android:id="@+id/clock"
             android:layout_marginTop="81dp"
             style="@style/DialButton"
             android:layout_gravity="center_horizontal"

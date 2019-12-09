@@ -7,8 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import timber.log.Timber
 
 class EnvelopeCallApp: Application() {
-    val newCall = MutableLiveData<Call>()
-    val callState = MutableLiveData<Int>()
+    val callState = MutableLiveData<CallState>()
 
     override fun onCreate() {
         super.onCreate()

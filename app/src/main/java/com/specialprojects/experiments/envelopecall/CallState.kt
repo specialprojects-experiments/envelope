@@ -18,3 +18,10 @@ fun Int.asString(): String = when (this) {
         "UNKNOWN"
     }
 }
+
+sealed class CallState {
+    class Ringing(val call: Call) : CallState()
+    class Dialing(val call: Call) : CallState()
+    class Active(val call: Call) : CallState()
+    object Default : CallState()
+}
