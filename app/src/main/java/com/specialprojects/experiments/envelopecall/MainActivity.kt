@@ -5,11 +5,13 @@ import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.app.role.RoleManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.drawable.LevelListDrawable
 import android.graphics.drawable.TransitionDrawable
+import android.hardware.SensorManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.telecom.TelecomManager
@@ -18,6 +20,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.addListener
 import androidx.core.app.ActivityCompat
@@ -29,11 +32,16 @@ import timber.log.Timber
 
 
 class MainActivity : AppCompatActivity() {
+    private val REQUEST_CODE_SET_DEFAULT_DIALER: Int = 0x1
     private val REQUEST_CALL_PHONE: Int = 0x2
 
     private val callBtnView by bindView<Button>(R.id.call)
     private val numberView by bindView<TextView>(R.id.number)
     private val clockBtnView by bindView<Button>(R.id.clock)
+
+    private val handler = Handler()
+
+    private lateinit var proximitySensor: ProximitySensor
 
     private val idActionMap = mapOf(
         R.id.one to "1",
@@ -50,125 +58,21 @@ class MainActivity : AppCompatActivity() {
         R.id.hash to "#"
     )
 
-    private fun dialUpAnimation(id: Int) {
-        val button = findViewById<Button>(id)
-        button.isPressed = true
-        button.isPressed = false
-    }
-
-    private val handler = Handler()
-
-    private fun playAnimation() {
-        dialUpAnimation(R.id.one)
-
-        handler.postDelayed({
-            dialUpAnimation(R.id.two)
-        }, 300)
-
-        handler.postDelayed({
-            dialUpAnimation(R.id.three)
-        }, 800)
-
-        handler.postDelayed({
-            dialUpAnimation(R.id.four)
-            clockBtnView.isPressed = false
-        }, 1100)
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun defaultCallHandle() {
-        callBtnView.alpha = 0F
-
-        numberView.text = ""
-
-        callBtnView.apply {
-            alpha = 0F
-            setOnClickListener {
-                val number = numberView.text.toString()
-                Timber.d("Calling number: $number")
-                val uri = "tel:$number".toUri()
-
-                if (checkPermissions()) {
-                    startActivity(Intent(Intent.ACTION_CALL, uri))
-                }
-            }
-            setOnLongClickListener {
-                numberView.text = ""
-                true
-            }
-        }
-    }
-
-    private fun checkPermissions(): Boolean {
-        Timber.d(" Checking permissions.")
-
-        return if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.CALL_PHONE
-        ) != PackageManager.PERMISSION_GRANTED) {
-            Timber.i("Call Phone permissions has NOT been granted. Requesting permissions.")
-            requestPermissions()
-            false
-        } else {
-            Timber.i("Contact permissions have already been granted")
-            true
-        }
-    }
-
-    private fun requestPermissions() { // BEGIN_INCLUDE(contacts_permission_request)
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)) {
-            Timber.i("Displaying call permission rationale to provide additional context.")
-        } else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), REQUEST_CALL_PHONE)
-        }
-    }
-
-    private fun offerReplacingDefaultDialer() {
-        val telecomManager = getSystemService(Context.TELECOM_SERVICE) as TelecomManager
-
-        if (telecomManager.defaultDialerPackage !== packageName) {
-            val changeDialer = Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER)
-            changeDialer.putExtra(
-                TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME,
-                packageName
-            )
-            startActivity(changeDialer)
-        }
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            REQUEST_CALL_PHONE -> {
-                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-
-                }
-                return
-            }
-            else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        }
-    }
-
-    private var currentAnimation: Animator? = null
-
-    private fun createPulseAnimation() {
-        val callButton = findViewById<Button>(R.id.call)
-
-        callBtnView.alpha = 1F
-
-        currentAnimation = ObjectAnimator.ofFloat(callButton, "alpha", 0F).apply {
-            duration = 300
-            repeatCount = ValueAnimator.INFINITE
-            repeatMode = ValueAnimator.REVERSE
-        }
-
-        currentAnimation?.addListener(onEnd = {
-            callButton.alpha = 1F
-        })
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        proximitySensor = ProximitySensor(this)
+        proximitySensor.state.observe(this, Observer {
+            when(it) {
+                ProximityState.Near -> {
+                    Timber.d("Near")
+                }
+                ProximityState.Far -> {
+                    Timber.d("Far")
+                }
+            }
+        })
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -249,5 +153,149 @@ class MainActivity : AppCompatActivity() {
             clockBtnView.isPressed = true
             //playAnimation()
         }
+    }
+
+    private fun dialUpAnimation(id: Int) {
+        val button = findViewById<Button>(id)
+        button.isPressed = true
+        button.isPressed = false
+    }
+
+    private fun playAnimation() {
+        dialUpAnimation(R.id.one)
+
+        handler.postDelayed({
+            dialUpAnimation(R.id.two)
+        }, 300)
+
+        handler.postDelayed({
+            dialUpAnimation(R.id.three)
+        }, 800)
+
+        handler.postDelayed({
+            dialUpAnimation(R.id.four)
+            clockBtnView.isPressed = false
+        }, 1100)
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun defaultCallHandle() {
+        callBtnView.alpha = 0F
+
+        numberView.text = ""
+
+        callBtnView.apply {
+            alpha = 0F
+            setOnClickListener {
+                val number = numberView.text.toString()
+                Timber.d("Calling number: $number")
+                val uri = "tel:$number".toUri()
+
+                if (checkPermissions()) {
+                    startActivity(Intent(Intent.ACTION_CALL, uri))
+                }
+            }
+            setOnLongClickListener {
+                numberView.text = ""
+                true
+            }
+        }
+    }
+
+    private fun checkPermissions(): Boolean {
+        Timber.d(" Checking permissions.")
+
+        return if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CALL_PHONE
+        ) != PackageManager.PERMISSION_GRANTED) {
+            Timber.i("Call Phone permissions has NOT been granted. Requesting permissions.")
+            requestPermissions()
+            false
+        } else {
+            Timber.i("Contact permissions have already been granted")
+            true
+        }
+    }
+
+    private fun requestPermissions() { // BEGIN_INCLUDE(contacts_permission_request)
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)) {
+            Timber.i("Displaying call permission rationale to provide additional context.")
+        } else {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), REQUEST_CALL_PHONE)
+        }
+    }
+
+    @SuppressLint("WrongConstant")
+    private fun offerReplacingDefaultDialer() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val roleManager = getSystemService(Context.ROLE_SERVICE) as RoleManager
+            val intent = roleManager.createRequestRoleIntent(RoleManager.ROLE_DIALER)
+            startActivityForResult(intent, REQUEST_CODE_SET_DEFAULT_DIALER)
+        } else {
+            val telecomManager = getSystemService(Context.TELECOM_SERVICE) as TelecomManager
+
+            if (telecomManager.defaultDialerPackage !== packageName) {
+                val changeDialer = Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER)
+                changeDialer.putExtra(
+                    TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME,
+                    packageName
+                )
+                startActivityForResult(intent, REQUEST_CODE_SET_DEFAULT_DIALER)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val message = when (resultCode) {
+            RESULT_OK -> "User accepted request to become default dialer"
+            RESULT_CANCELED -> "User declined request to become default dialer"
+            else -> "Unexpected result code $resultCode"
+        }
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            REQUEST_CALL_PHONE -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+
+                }
+                return
+            }
+            else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        }
+    }
+
+    private var currentAnimation: Animator? = null
+
+    private fun createPulseAnimation() {
+        val callButton = findViewById<Button>(R.id.call)
+
+        callBtnView.alpha = 1F
+
+        currentAnimation = ObjectAnimator.ofFloat(callButton, "alpha", 0F).apply {
+            duration = 300
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.REVERSE
+        }
+
+        currentAnimation?.addListener(onEnd = {
+            callButton.alpha = 1F
+        })
+    }
+
+    override fun onResume() {
+        // Register a listener for the sensor.
+        super.onResume()
+
+        proximitySensor.startListening()
+    }
+
+    override fun onPause() {
+        // Be sure to unregister the sensor when the activity pauses.
+        super.onPause()
+        proximitySensor.stopListening()
     }
 }

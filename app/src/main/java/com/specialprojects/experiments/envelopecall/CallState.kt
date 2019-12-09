@@ -3,7 +3,7 @@ package com.specialprojects.experiments.envelopecall
 import android.telecom.Call
 import timber.log.Timber
 
-fun Int.asString(): String = when (this) {
+fun Int.asString() = when (this) {
     Call.STATE_NEW -> "NEW"
     Call.STATE_RINGING -> "RINGING"
     Call.STATE_DIALING -> "DIALING"
