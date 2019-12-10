@@ -1,4 +1,4 @@
-package com.specialprojects.experiments.envelopecall
+package com.specialprojects.experiments.envelopecall.sensor
 
 import android.content.Context
 import android.hardware.Sensor
@@ -25,7 +25,9 @@ class ProximitySensor(context: Context): SensorEventListener {
     override fun onSensorChanged(event: SensorEvent) {
         val distance = event.values[0]
 
-        if (distance == proximity.maximumRange) state.postValue(ProximityState.Far) else state.postValue(ProximityState.Near)
+        if (distance == proximity.maximumRange) state.postValue(ProximityState.Far) else state.postValue(
+            ProximityState.Near
+        )
     }
 
     fun startListening() {

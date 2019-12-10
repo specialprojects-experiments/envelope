@@ -1,6 +1,5 @@
-package com.specialprojects.experiments.envelopecall
+package com.specialprojects.experiments.envelopecall.telephony
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -11,6 +10,7 @@ import android.media.RingtoneManager
 import android.telecom.Call
 import android.telecom.InCallService
 import androidx.core.app.NotificationCompat
+import com.specialprojects.experiments.envelopecall.*
 import timber.log.Timber
 
 
@@ -21,7 +21,11 @@ class CallService: InCallService() {
         super.onCallAdded(call)
 
         if (call.state == Call.STATE_RINGING) {
-            (applicationContext as EnvelopeCallApp).callState.postValue(CallState.Ringing(call))
+            (applicationContext as EnvelopeCallApp).callState.postValue(
+                CallState.Ringing(
+                    call
+                )
+            )
             postNotification()
         }
     }
@@ -77,9 +81,15 @@ class CallService: InCallService() {
 
             (applicationContext as EnvelopeCallApp).callState.postValue(
                 when(newState) {
-                    Call.STATE_ACTIVE -> CallState.Active(call)
-                    Call.STATE_RINGING -> CallState.Ringing(call)
-                    Call.STATE_DIALING -> CallState.Dialing(call)
+                    Call.STATE_ACTIVE -> CallState.Active(
+                        call
+                    )
+                    Call.STATE_RINGING -> CallState.Ringing(
+                        call
+                    )
+                    Call.STATE_DIALING -> CallState.Dialing(
+                        call
+                    )
                     Call.STATE_DISCONNECTED -> CallState.Default
                     else -> CallState.Default
                 })

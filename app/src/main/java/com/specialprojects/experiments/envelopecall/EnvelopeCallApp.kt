@@ -1,9 +1,8 @@
 package com.specialprojects.experiments.envelopecall
 
 import android.app.Application
-import android.telecom.Call
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.specialprojects.experiments.envelopecall.telephony.CallState
 import timber.log.Timber
 
 class EnvelopeCallApp: Application() {
