@@ -91,7 +91,7 @@
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
                 style="@style/DialButton"
-                android:text="7" />
+                android:text="" />
 
             <Button
                 android:id="@+id/eight"
@@ -99,7 +99,7 @@
                 android:layout_height="@dimen/button_size"
                 android:layout_marginStart="23dp"
                 style="@style/DialButton"
-                android:text="8" />
+                android:text="" />
 
             <Button
                 android:id="@+id/nine"
@@ -107,7 +107,7 @@
                 android:layout_height="@dimen/button_size"
                 android:layout_marginStart="23dp"
                 style="@style/DialButton"
-                android:text="9" />
+                android:text="" />
 
         </LinearLayout>
 
@@ -122,7 +122,7 @@
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
                 style="@style/DialButton"
-                android:text="*" />
+                android:text="" />
 
             <Button
                 android:id="@+id/zero"
@@ -130,7 +130,7 @@
                 android:layout_height="@dimen/button_size"
                 android:layout_marginStart="23dp"
                 style="@style/DialButton"
-                android:text="0" />
+                android:text="" />
 
             <Button
                 android:id="@+id/hash"
@@ -138,7 +138,7 @@
                 android:layout_height="@dimen/button_size"
                 android:layout_marginStart="23dp"
                 style="@style/DialButton"
-                android:text="#" />
+                android:text="" />
 
         </LinearLayout>
 
@@ -160,34 +160,5 @@
             android:layout_height="@dimen/button_size" />
 
     </LinearLayout>
-
-    <!--
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Call" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Status" />
-
-    <Button
-        android:id="@+id/hangup"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hangup" />
-
-    <Button
-        android:id="@+id/accept"
-        android:layout_gravity="center_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Accept" /> -->
 
 </FrameLayout>

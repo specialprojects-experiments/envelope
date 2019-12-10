@@ -29,6 +29,7 @@ import androidx.core.net.toUri
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import timber.log.Timber
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -66,10 +67,10 @@ class MainActivity : AppCompatActivity() {
         proximitySensor.state.observe(this, Observer {
             when(it) {
                 ProximityState.Near -> {
-                    Timber.d("Near")
+                    setReadyStyles()
                 }
                 ProximityState.Far -> {
-                    Timber.d("Far")
+                    setDefaultStyles()
                 }
             }
         })
@@ -150,9 +151,24 @@ class MainActivity : AppCompatActivity() {
         offerReplacingDefaultDialer()
 
         clockBtnView.setOnClickListener {
-            clockBtnView.isPressed = true
-            //playAnimation()
+            playAnimation()
         }
+    }
+
+    private fun setDefaultStyles() {
+        idActionMap.keys.forEach { id ->
+            findViewById<Button>(id).setBackgroundResource(R.drawable.btn_dial_background)
+        }
+
+        clockBtnView.setBackgroundResource(R.drawable.btn_clock_background)
+    }
+
+    private fun setReadyStyles() {
+        idActionMap.keys.forEach { id ->
+            findViewById<Button>(id).setBackgroundResource(R.drawable.btn_dial_background_ready)
+        }
+
+        clockBtnView.setBackgroundResource(R.drawable.btn_clock_background_ready)
     }
 
     private fun dialUpAnimation(id: Int) {
@@ -162,20 +178,61 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun playAnimation() {
-        dialUpAnimation(R.id.one)
+        if (clockBtnView.isSelected) return
+
+        clockBtnView.isSelected = true
+
+        val rightNow = Calendar.getInstance()
+        val currentHourIn24Format = rightNow.get(Calendar.HOUR_OF_DAY)
+        val currentMinutes = rightNow.get(Calendar.MINUTE)
+
+        val hour = if(currentHourIn24Format < 10) "0$currentHourIn24Format" else currentHourIn24Format.toString()
+        val minutes = if(currentMinutes < 10) "0$currentMinutes" else currentMinutes.toString()
+
+        val chars = "$hour$minutes".toCharArray()
+
+        val listIds = mutableListOf<Int>()
+
+        chars.forEach {
+            Timber.d(it.toString())
+            val id = idActionMap.entries.first { (_, value) -> value == it.toString() }
+
+            listIds.add(id.key)
+        }
+
+        dialUpAnimation(listIds[0])
 
         handler.postDelayed({
-            dialUpAnimation(R.id.two)
+            dialUpAnimation(listIds[1])
         }, 300)
 
         handler.postDelayed({
-            dialUpAnimation(R.id.three)
+            dialUpAnimation(listIds[2])
         }, 800)
 
         handler.postDelayed({
-            dialUpAnimation(R.id.four)
-            clockBtnView.isPressed = false
+            dialUpAnimation(listIds[3])
         }, 1100)
+
+        handler.postDelayed({
+            dialUpAnimation(listIds[0])
+        }, 2000)
+
+        handler.postDelayed({
+            dialUpAnimation(listIds[1])
+        }, 2300)
+
+        handler.postDelayed({
+            dialUpAnimation(listIds[2])
+        }, 2800)
+
+        handler.postDelayed({
+            dialUpAnimation(listIds[3])
+        }, 3100)
+
+        handler.postDelayed({
+            clockBtnView.isSelected = false
+        }, 3500)
     }
 
     @SuppressLint("MissingPermission")
@@ -241,7 +298,7 @@ class MainActivity : AppCompatActivity() {
                     TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME,
                     packageName
                 )
-                startActivityForResult(intent, REQUEST_CODE_SET_DEFAULT_DIALER)
+                startActivity(changeDialer)
             }
         }
     }
