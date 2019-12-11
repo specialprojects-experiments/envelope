@@ -1,4 +1,4 @@
-package com.specialprojects.experiments.envelopecall
+package com.specialprojects.experiments.envelopecall.ui.call
 
 import android.Manifest
 import android.animation.Animator
@@ -9,7 +9,6 @@ import android.app.role.RoleManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.drawable.TransitionDrawable
 import android.media.*
 import android.os.Build
 import android.os.Bundle
@@ -28,17 +27,17 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
-import com.specialprojects.experiments.envelopecall.audio.DTMF
-import com.specialprojects.experiments.envelopecall.audio.DTMFPlayer
+import com.specialprojects.experiments.envelopecall.EnvelopeCallApp
+import com.specialprojects.experiments.envelopecall.R
+import com.specialprojects.experiments.envelopecall.ui.util.bindView
 import com.specialprojects.experiments.envelopecall.sensor.ProximitySensor
 import com.specialprojects.experiments.envelopecall.sensor.ProximityState
 import com.specialprojects.experiments.envelopecall.telephony.CallState
 import timber.log.Timber
-import java.nio.ByteBuffer
 import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class CallActivity : AppCompatActivity() {
     private val REQUEST_CODE_SET_DEFAULT_DIALER: Int = 0x1
     private val REQUEST_CALL_PHONE: Int = 0x2
 
@@ -67,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     private val idSoundMap = mapOf(
-        R.id.one to  R.raw.dtmf_1,
+        R.id.one to R.raw.dtmf_1,
         R.id.two to R.raw.dtmf_2,
         R.id.three to R.raw.dtmf_3,
         R.id.four to R.raw.dtmf_4,
@@ -101,7 +100,7 @@ class MainActivity : AppCompatActivity() {
 
         tonePool.apply {
             for(i in idSoundMap) {
-                val soundId = soundPool.load(this@MainActivity, i.value, 1)
+                val soundId = soundPool.load(this@CallActivity, i.value, 1)
                 put(i.key, soundId)
             }
         }

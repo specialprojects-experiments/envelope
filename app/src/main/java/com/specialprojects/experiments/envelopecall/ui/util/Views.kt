@@ -1,4 +1,4 @@
-package com.specialprojects.experiments.envelopecall
+package com.specialprojects.experiments.envelopecall.ui.util
 
 import android.app.Activity
 import android.view.View
@@ -14,14 +14,4 @@ fun <T : View> Fragment.bindView(id: Int): Lazy<T> = lazy(LazyThreadSafetyMode.N
 
 fun <T : View> RecyclerView.ViewHolder.bindView(id: Int): Lazy<T> = lazy(LazyThreadSafetyMode.NONE) { itemView.findViewById<T>(id) ?: viewNotFound(id) }
 
-private fun viewNotFound(id: Int): Nothing =
-    throw IllegalStateException("View ID $id not found.")
-
-inline fun View.waitForLayout(crossinline f: () -> Unit) = with(viewTreeObserver) {
-    addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-        override fun onGlobalLayout() {
-            removeOnGlobalLayoutListener(this)
-            f()
-        }
-    })
-}
+private fun viewNotFound(id: Int): Nothing = throw IllegalStateException("View ID $id not found.")

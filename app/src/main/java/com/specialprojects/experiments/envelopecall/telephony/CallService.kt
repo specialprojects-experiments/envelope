@@ -11,6 +11,7 @@ import android.telecom.Call
 import android.telecom.InCallService
 import androidx.core.app.NotificationCompat
 import com.specialprojects.experiments.envelopecall.*
+import com.specialprojects.experiments.envelopecall.ui.call.CallActivity
 import timber.log.Timber
 
 
@@ -54,7 +55,7 @@ class CallService: InCallService() {
 
         val intent = Intent(Intent.ACTION_MAIN, null)
         intent.flags = Intent.FLAG_ACTIVITY_NO_USER_ACTION or Intent.FLAG_ACTIVITY_NEW_TASK
-        intent.setClass(this, MainActivity::class.java)
+        intent.setClass(this, CallActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 1, intent, 0)
 
         val builder = NotificationCompat.Builder(this, YOUR_CHANNEL_ID).apply {
