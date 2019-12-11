@@ -161,8 +161,8 @@ class MainActivity : AppCompatActivity() {
         (applicationContext as EnvelopeCallApp).callState.observe(this, Observer { callState ->
             when(callState) {
                 CallState.Default -> {
+                    callBtnView.isSelected = false
                     callBtnView.alpha = 0F
-                    (callBtnView.background as TransitionDrawable).resetTransition()
                     currentAnimation?.end()
                     defaultCallHandle()
                 }
@@ -193,8 +193,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 is CallState.Active -> {
                     callBtnView.apply {
-                        callBtnView.setBackgroundResource(R.drawable.call_button_state)
-                        (background as TransitionDrawable).startTransition(300)
+                        alpha = 1F
+                        isSelected = true
                         setOnClickListener {
                             callState.call.disconnect()
                         }
@@ -261,7 +261,7 @@ class MainActivity : AppCompatActivity() {
 
         handler.postDelayed({
             dialUpAnimation(listIds[1])
-        }, 300)
+        }, 150)
 
         handler.postDelayed({
             dialUpAnimation(listIds[2])
@@ -269,27 +269,27 @@ class MainActivity : AppCompatActivity() {
 
         handler.postDelayed({
             dialUpAnimation(listIds[3])
-        }, 1100)
+        }, 950)
 
         handler.postDelayed({
             dialUpAnimation(listIds[0])
-        }, 2000)
+        }, 1800)
 
         handler.postDelayed({
             dialUpAnimation(listIds[1])
-        }, 2300)
+        }, 1950)
 
         handler.postDelayed({
             dialUpAnimation(listIds[2])
-        }, 2800)
+        }, 2700)
 
         handler.postDelayed({
             dialUpAnimation(listIds[3])
-        }, 3100)
+        }, 2850)
 
         handler.postDelayed({
             clockBtnView.isSelected = false
-        }, 3500)
+        }, 3000)
     }
 
     @SuppressLint("MissingPermission")

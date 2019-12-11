@@ -21,12 +21,8 @@ class CallService: InCallService() {
         super.onCallAdded(call)
 
         if (call.state == Call.STATE_RINGING) {
-            (applicationContext as EnvelopeCallApp).callState.postValue(
-                CallState.Ringing(
-                    call
-                )
-            )
-            postNotification()
+            (applicationContext as EnvelopeCallApp).callState.postValue(CallState.Ringing(call))
+            //postNotification()
         }
     }
 
@@ -101,6 +97,6 @@ class CallService: InCallService() {
         super.onCallRemoved(call)
         call.unregisterCallback(callback)
 
-        removeNotification()
+        //removeNotification()
     }
 }
