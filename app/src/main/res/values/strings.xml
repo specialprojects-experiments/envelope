@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Envelope Call</string>
+    <string-array name="onboarding_entries">
+        <item>Envelope temporarily transforms your phone into a simpler, calmer device, helping you to take a break away from your digital world.</item>
+        <item>Before we begin you’ll need to print out and fold a special envelope.\n\nYou can download a pdf with instructions</item>
+        <item>This app acts as a dialer to make calls, in order to use it you’ll need to set the app the default phone app.</item>
+        <item>This app stays on your screen once you lock your phone away in the envelope, to allow it to do so please enable screen pinning in the settings on the following screen.</item>
+        <item>To keep this app on your screen please pin it now.\n\n\Tap here to pin.</item>
+    </string-array>
 </resources>

@@ -37,6 +37,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.onboarding.OnboardingActivity" android:exported="true" />
 
         <service android:name=".telephony.CallService"
             android:permission="android.permission.BIND_INCALL_SERVICE">

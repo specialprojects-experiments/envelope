@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">#000</item>
+        <item name="android:fontFamily">@font/dmsans_regular</item>
     </style>
 
     <style name="DialButton">
