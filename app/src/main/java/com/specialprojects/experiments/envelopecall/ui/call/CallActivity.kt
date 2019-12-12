@@ -39,7 +39,7 @@ import java.util.*
 
 
 class CallActivity : AppCompatActivity() {
-    private val REQUEST_CODE_SET_DEFAULT_DIALER: Int = 0x1
+
     private val REQUEST_CALL_PHONE: Int = 0x2
 
     private val callBtnView by bindView<Button>(R.id.call)
@@ -215,8 +215,6 @@ class CallActivity : AppCompatActivity() {
             }
         })
 
-        offerReplacingDefaultDialer()
-
         clockBtnView.setOnClickListener {
             playAnimation()
         }
@@ -366,36 +364,6 @@ class CallActivity : AppCompatActivity() {
         } else {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), REQUEST_CALL_PHONE)
         }
-    }
-
-    @SuppressLint("WrongConstant")
-    private fun offerReplacingDefaultDialer() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val roleManager = getSystemService(Context.ROLE_SERVICE) as RoleManager
-            val intent = roleManager.createRequestRoleIntent(RoleManager.ROLE_DIALER)
-            startActivityForResult(intent, REQUEST_CODE_SET_DEFAULT_DIALER)
-        } else {
-            val telecomManager = getSystemService(Context.TELECOM_SERVICE) as TelecomManager
-
-            if (telecomManager.defaultDialerPackage !== packageName) {
-                val changeDialer = Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER)
-                changeDialer.putExtra(
-                    TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME,
-                    packageName
-                )
-                startActivity(changeDialer)
-            }
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        val message = when (resultCode) {
-            RESULT_OK -> "User accepted request to become default dialer"
-            RESULT_CANCELED -> "User declined request to become default dialer"
-            else -> "Unexpected result code $resultCode"
-        }
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {

@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.specialprojects.experiments.envelopecall.R
 import com.specialprojects.experiments.envelopecall.ui.adapters.BindableAdapter
 
-class OnboardingAdapter(onClick: ((position: Int) -> Unit)): BindableAdapter<String, BindableAdapter.ViewHolder<String>>(onClick) {
+class OnboardingAdapter: BindableAdapter<String, BindableAdapter.ViewHolder<String>>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(viewGroup.context)
 
@@ -24,21 +24,25 @@ class OnboardingAdapter(onClick: ((position: Int) -> Unit)): BindableAdapter<Str
     class ViewHolder(
         view: View
     ): BindableAdapter.ViewHolder<String>(view) {
-        override fun bind(item: String)  {
-            val string = SpannableString(item)
-            string.setSpan(CustomClickableSpan(2), 10, 19, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        override fun bind(item: String, position: Int)  {
 
             (itemView as TextView).apply {
-                text = string
-                movementMethod = LinkMovementMethod.getInstance()
+                if (position == 1) {
+                    val string = SpannableString(item)
+                    string.setSpan(CustomClickableSpan(), 111, 116, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    text = string
+                    movementMethod = LinkMovementMethod.getInstance()
+                } else {
+                    text = item
+                }
             }
         }
     }
 }
 
-class CustomClickableSpan(val id: Int): ClickableSpan() {
+class CustomClickableSpan: ClickableSpan() {
     override fun onClick(view: View) {
-        (view.context as OnboardingActivity).onItemClick(id)
+        (view.context as OnboardingActivity).onLinkClicked()
     }
 
     override fun updateDrawState(ds: TextPaint) {

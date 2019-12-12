@@ -14,14 +14,13 @@
         android:layout_weight="1" />
 
     <com.rd.PageIndicatorView
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="36dp"
         android:layout_marginStart="52dp"
         android:id="@+id/pageIndicatorView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         app:piv_animationType="slide"
-        app:piv_count="5"
         app:piv_interactiveAnimation="true"
         app:piv_selectedColor="#FFF"
         app:piv_unselectedColor="#66FFFFFF"

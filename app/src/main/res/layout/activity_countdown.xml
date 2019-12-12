@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="#000"
+    android:paddingEnd="52dp"
+    android:paddingStart="51dp"
+    android:paddingTop="40dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/instructions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textSize="37sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="2sp"
+        android:text="Now place the phone in your envelope and seal it.\n\nYou can lock and unlock your phone using the fingerprint sensor at any time and dial a number." />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:id="@+id/countdown"
+        android:textSize="55sp"
+        android:layout_marginBottom="32dp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="-13sp"
+        android:text="10"
+        />
+
+</LinearLayout>

@@ -3,9 +3,7 @@ package com.specialprojects.experiments.envelopecall.ui.adapters
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BindableAdapter<T, VH: BindableAdapter.ViewHolder<T>>(
-    val itemClickListener: ((position: Int) -> Unit)
-): RecyclerView.Adapter<VH>() {
+abstract class BindableAdapter<T, VH: BindableAdapter.ViewHolder<T>>: RecyclerView.Adapter<VH>() {
 
     private val items: MutableList<T> = mutableListOf()
 
@@ -27,7 +25,7 @@ abstract class BindableAdapter<T, VH: BindableAdapter.ViewHolder<T>>(
     operator fun get(position: Int): T = items[position]
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.bind(get(position))
+        holder.bind(get(position), position)
     }
 
     override fun getItemCount(): Int = items.size
@@ -39,6 +37,6 @@ abstract class BindableAdapter<T, VH: BindableAdapter.ViewHolder<T>>(
     }
 
     abstract class ViewHolder <T>(view: View): RecyclerView.ViewHolder(view) {
-        abstract fun bind(item: T)
+        abstract fun bind(item: T, position: Int)
     }
 }

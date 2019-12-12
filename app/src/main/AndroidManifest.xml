@@ -35,7 +35,6 @@
 
         <activity android:name=".ui.onboarding.OnboardingActivity" android:exported="true" android:screenOrientation="portrait" />
         <activity android:name=".ui.HelpActivity" android:screenOrientation="portrait" android:exported="true"  />
-
         <activity android:name=".ui.SplashActivity" android:screenOrientation="portrait" android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -43,12 +42,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.CountdownActivity" android:screenOrientation="portrait"  android:exported="true"  />
 
         <service android:name=".telephony.CallService"
             android:permission="android.permission.BIND_INCALL_SERVICE">
+
             <meta-data android:name="android.telecom.IN_CALL_SERVICE_UI" android:value="true" />
-            <meta-data android:name="android.telecom.IN_CALL_SERVICE_RINGING"
-                android:value="true" />
+
             <intent-filter>
                 <action android:name="android.telecom.InCallService"/>
             </intent-filter>
