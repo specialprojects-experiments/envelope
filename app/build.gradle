@@ -10,7 +10,6 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -21,12 +20,10 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation deps.kotlin.stdlib.jdk
     implementation deps.androidx.appCompat
     implementation deps.androidx.core
     implementation deps.androidx.viewPager
     implementation deps.pageIndicatorView
     implementation deps.timber
-    testImplementation 'junit:junit:4.12'
 }
