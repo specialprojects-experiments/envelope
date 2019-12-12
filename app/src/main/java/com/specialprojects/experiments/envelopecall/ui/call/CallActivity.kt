@@ -98,12 +98,19 @@ class CallActivity : AppCompatActivity() {
             .setAudioAttributes(attributes)
             .build()
 
+        tonePool.clear()
         tonePool.apply {
             for(i in idSoundMap) {
                 val soundId = soundPool.load(this@CallActivity, i.value, 1)
                 put(i.key, soundId)
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        createSoundPool()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -125,8 +132,6 @@ class CallActivity : AppCompatActivity() {
         val layout = window.attributes
         layout.screenBrightness = 1F
         window.attributes = layout
-
-        createSoundPool()
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
