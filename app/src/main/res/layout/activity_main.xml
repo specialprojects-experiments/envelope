@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000"
     tools:context=".ui.call.CallActivity">
 
     <TextView
@@ -29,7 +30,8 @@
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
                 style="@style/DialButton"
-                android:text="" />
+                android:textSize="24sp"
+                android:text="1" />
 
             <Button
                 android:id="@+id/two"
@@ -37,7 +39,8 @@
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
                 style="@style/DialButton"
-                android:text="" />
+                android:textSize="24sp"
+                android:text="2" />
 
             <Button
                 android:id="@+id/three"
@@ -45,7 +48,8 @@
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
                 style="@style/DialButton"
-                android:text="" />
+                android:textSize="24sp"
+                android:text="3" />
 
         </LinearLayout>
 
@@ -60,23 +64,26 @@
                 style="@style/DialButton"
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
-                android:text="" />
+                android:textSize="24sp"
+                android:text="4" />
 
             <Button
                 android:id="@+id/five"
                 android:layout_marginStart="26dp"
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
+                android:textSize="24sp"
                 style="@style/DialButton"
-                android:text="" />
+                android:text="5" />
 
             <Button
                 android:id="@+id/six"
                 android:layout_marginStart="26dp"
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
+                android:textSize="24sp"
                 style="@style/DialButton"
-                android:text="" />
+                android:text="6" />
 
         </LinearLayout>
 
@@ -91,7 +98,8 @@
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
                 style="@style/DialButton"
-                android:text="" />
+                android:textSize="24sp"
+                android:text="7" />
 
             <Button
                 android:id="@+id/eight"
@@ -99,7 +107,8 @@
                 android:layout_height="@dimen/button_size"
                 android:layout_marginStart="26dp"
                 style="@style/DialButton"
-                android:text="" />
+                android:textSize="24sp"
+                android:text="8" />
 
             <Button
                 android:id="@+id/nine"
@@ -107,7 +116,8 @@
                 android:layout_height="@dimen/button_size"
                 android:layout_marginStart="26dp"
                 style="@style/DialButton"
-                android:text="" />
+                android:textSize="24sp"
+                android:text="9" />
 
         </LinearLayout>
 
@@ -122,7 +132,8 @@
                 android:layout_width="@dimen/button_size"
                 android:layout_height="@dimen/button_size"
                 style="@style/DialButton"
-                android:text="" />
+                android:textSize="24sp"
+                android:text="*" />
 
             <Button
                 android:id="@+id/zero"
@@ -130,7 +141,8 @@
                 android:layout_height="@dimen/button_size"
                 android:layout_marginStart="26dp"
                 style="@style/DialButton"
-                android:text="" />
+                android:textSize="24sp"
+                android:text="0" />
 
             <Button
                 android:id="@+id/hash"
@@ -138,7 +150,8 @@
                 android:layout_height="@dimen/button_size"
                 android:layout_marginStart="26dp"
                 style="@style/DialButton"
-                android:text="" />
+                android:textSize="24sp"
+                android:text="#" />
 
         </LinearLayout>
 
@@ -147,6 +160,9 @@
             android:background="@drawable/call_button_state"
             android:layout_marginTop="27dp"
             style="@style/DialButton"
+            android:text="call"
+            android:textSize="12sp"
+            android:textAllCaps="true"
             android:layout_gravity="center_horizontal"
             android:layout_width="@dimen/button_size"
             android:layout_height="@dimen/button_size" />
@@ -155,6 +171,9 @@
             android:id="@+id/clock"
             android:layout_marginTop="91dp"
             style="@style/DialButton"
+            android:textAllCaps="true"
+            android:text="clock"
+            android:textSize="12sp"
             android:layout_gravity="center_horizontal"
             android:layout_width="@dimen/button_size"
             android:layout_height="@dimen/button_size" />

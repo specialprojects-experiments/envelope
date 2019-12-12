@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".ui.call.CallActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +38,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.onboarding.OnboardingActivity" android:exported="true" />
+        <activity android:name=".ui.onboarding.OnboardingActivity" android:exported="true" android:screenOrientation="portrait" />
 
         <service android:name=".telephony.CallService"
             android:permission="android.permission.BIND_INCALL_SERVICE">
