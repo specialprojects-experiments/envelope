@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:background="#000"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:paddingTop="46dp"
+        android:paddingBottom="46dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/close"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:background="@drawable/ic_close_white_24dp"
+            />
+
+        <TextView
+            android:layout_marginTop="36dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textColor="#FFF"
+            android:fontFamily="@font/varela_regular"
+            android:letterSpacing="0.12"
+            android:text="HOW TO USE\nTHE APP"
+            />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#FFF"
+            android:text="Thanks for downloading Envelope, an experimental app which temporarily transforms your phoneinto a simpler, calmer device."
+            />
+
+        <TextView
+            android:layout_marginTop="72dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textColor="#FFF"
+            android:fontFamily="@font/varela_regular"
+            android:letterSpacing="0.12"
+            android:text="MAKING AN ENVELOPE"
+            />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#FFF"
+            android:text="To use the app you’ll need to download, print and build an envelope which fits your phone exactly. You can find this here. We currently only support the Pixel 3a."
+            />
+
+        <TextView
+            android:layout_marginTop="72dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textColor="#FFF"
+            android:fontFamily="@font/varela_regular"
+            android:letterSpacing="0.12"
+            android:text="USING ENVELOPE"
+            />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#FFF"
+            android:text="When you’re ready, simply open the app and follow the instructions before placing it in to your envelope and sealing it. Once the phone is inside it can only be used to make, receive calls and check the time, to help you take a break from your digital world. You can lock and unlock your phone using the side button, and the fingerprint sensor on the back." />
+
+        <TextView
+            android:layout_marginTop="72dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textColor="#FFF"
+            android:fontFamily="@font/varela_regular"
+            android:letterSpacing="0.12"
+            android:text="BATTERY LIFE"
+            />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#FFF"
+            android:text="The envelope app stays on all the time your phone is inside an envelope but has been programmed to massively reduce the battery usage by taking advantage of OLED screen technology." />
+
+        <TextView
+            android:layout_marginTop="72dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:fontFamily="@font/varela_regular"
+            android:textColor="#FFF"
+            android:letterSpacing="0.12"
+            android:text="TIPS"
+            />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#FFF"
+            android:text="To keep the Envelope app at the front of your screen we require you to manually pin the app to your screen. For up to date instructions on how to do this please visit"
+            />
+
+        <TextView
+            android:layout_marginTop="72dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textColor="#FFF"
+            android:fontFamily="@font/varela_regular"
+            android:letterSpacing="0.12"
+            android:text="THANKS"
+            />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#FFF"
+            android:text="Thanks for taking the time to play with our little experiment and we’d love to hear from you if this app has helped you find a better balance with technology."
+            />
+
+    </LinearLayout>
+</ScrollView>

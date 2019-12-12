@@ -6,6 +6,26 @@
     android:background="#000"
     tools:context=".ui.call.CallActivity">
 
+    <Button
+        android:id="@+id/close"
+        android:layout_marginTop="46dp"
+        android:layout_marginStart="51dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:background="@drawable/ic_close_white_24dp" />
+
+    <TextView
+        android:id="@+id/help"
+        android:layout_gravity="end"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="51dp"
+        android:text="\?"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="#FFF"
+        android:layout_width="26dp"
+        android:layout_height="26dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

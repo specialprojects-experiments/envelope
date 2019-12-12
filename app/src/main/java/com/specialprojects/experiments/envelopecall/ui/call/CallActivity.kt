@@ -33,6 +33,7 @@ import com.specialprojects.experiments.envelopecall.ui.util.bindView
 import com.specialprojects.experiments.envelopecall.sensor.ProximitySensor
 import com.specialprojects.experiments.envelopecall.sensor.ProximityState
 import com.specialprojects.experiments.envelopecall.telephony.CallState
+import com.specialprojects.experiments.envelopecall.ui.HelpActivity
 import timber.log.Timber
 import java.util.*
 
@@ -128,6 +129,10 @@ class CallActivity : AppCompatActivity() {
                 }
             }
         })
+
+        findViewById<View>(R.id.help).setOnClickListener {
+            startActivity(Intent(this, HelpActivity::class.java))
+        }
 
         val layout = window.attributes
         layout.screenBrightness = 1F

@@ -17,7 +17,10 @@ class OnboardingActivity: AppCompatActivity() {
 
         val entries = resources.getStringArray(R.array.onboarding_entries)
 
-        viewPager.adapter = OnboardingAdapter().apply {
+        viewPager.adapter = OnboardingAdapter({
+            id ->
+            run {}
+        }).apply {
             changeData(entries.toList())
         }
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -25,5 +28,9 @@ class OnboardingActivity: AppCompatActivity() {
                 pageIndicatorView.selection = position
             }
         })
+    }
+
+    fun onItemClick(id: Int) {
+        stopLockTask()
     }
 }

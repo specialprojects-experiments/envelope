@@ -3,7 +3,9 @@ package com.specialprojects.experiments.envelopecall.ui.adapters
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BindableAdapter<T, VH: BindableAdapter.ViewHolder<T>>: RecyclerView.Adapter<VH>() {
+abstract class BindableAdapter<T, VH: BindableAdapter.ViewHolder<T>>(
+    val itemClickListener: ((position: Int) -> Unit)
+): RecyclerView.Adapter<VH>() {
 
     private val items: MutableList<T> = mutableListOf()
 
