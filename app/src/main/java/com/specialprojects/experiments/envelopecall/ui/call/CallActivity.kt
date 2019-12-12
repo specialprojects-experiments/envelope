@@ -260,7 +260,7 @@ class CallActivity : AppCompatActivity() {
 
         handler.postDelayed({
             dialUpAnimation(listIds[1])
-        }, 150)
+        }, 300)
 
         handler.postDelayed({
             dialUpAnimation(listIds[2])
@@ -268,7 +268,7 @@ class CallActivity : AppCompatActivity() {
 
         handler.postDelayed({
             dialUpAnimation(listIds[3])
-        }, 950)
+        }, 1100)
 
         handler.postDelayed({
             dialUpAnimation(listIds[0])
@@ -276,19 +276,19 @@ class CallActivity : AppCompatActivity() {
 
         handler.postDelayed({
             dialUpAnimation(listIds[1])
-        }, 1950)
+        }, 2100)
 
         handler.postDelayed({
             dialUpAnimation(listIds[2])
-        }, 2700)
+        }, 2600)
 
         handler.postDelayed({
             dialUpAnimation(listIds[3])
-        }, 2850)
+        }, 2900)
 
         handler.postDelayed({
             clockBtnView.isSelected = false
-        }, 3000)
+        }, 3300)
     }
 
     @SuppressLint("MissingPermission")
