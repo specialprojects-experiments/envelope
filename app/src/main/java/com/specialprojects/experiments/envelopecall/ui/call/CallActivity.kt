@@ -45,6 +45,8 @@ class CallActivity : AppCompatActivity() {
     private val callBtnView by bindView<Button>(R.id.call)
     private val numberView by bindView<TextView>(R.id.number)
     private val clockBtnView by bindView<Button>(R.id.clock)
+    private val closeView by bindView<Button>(R.id.close)
+    private val helpView by bindView<TextView>(R.id.help)
 
     private val handler = Handler()
 
@@ -111,6 +113,14 @@ class CallActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                or View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+
         createSoundPool()
     }
 
@@ -137,15 +147,6 @@ class CallActivity : AppCompatActivity() {
         val layout = window.attributes
         layout.screenBrightness = 1F
         window.attributes = layout
-
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
-                or View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-
 
         val numberView = findViewById<TextView>(R.id.number)
 
@@ -223,18 +224,36 @@ class CallActivity : AppCompatActivity() {
 
     private fun setDefaultStyles() {
         idActionMap.keys.forEach { id ->
-            findViewById<Button>(id).setBackgroundResource(R.drawable.btn_dial_background)
+            findViewById<Button>(id).apply {
+                setBackgroundResource(R.drawable.btn_dial_background)
+                text = idActionMap[id]
+            }
         }
 
-        clockBtnView.setBackgroundResource(R.drawable.btn_clock_background)
+        clockBtnView.apply {
+            setBackgroundResource(R.drawable.btn_clock_background)
+            text = "clock"
+        }
+
+        closeView.visibility = View.VISIBLE
+        helpView.visibility = View.VISIBLE
     }
 
     private fun setReadyStyles() {
+        closeView.visibility = View.GONE
+        helpView.visibility = View.GONE
+
         idActionMap.keys.forEach { id ->
             findViewById<Button>(id).setBackgroundResource(R.drawable.btn_dial_background_ready)
+            findViewById<TextView>(id).apply {
+                text = ""
+            }
         }
 
-        clockBtnView.setBackgroundResource(R.drawable.btn_clock_background_ready)
+        clockBtnView.apply {
+            setBackgroundResource(R.drawable.btn_clock_background_ready)
+            text = ""
+        }
     }
 
     private fun dialUpAnimation(id: Int) {
