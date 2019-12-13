@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#FFF"
+    android:paddingStart="52dp"
+    android:paddingEnd="51dp"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:tint="#000"
+        android:layout_marginTop="37dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_logo" />
+
+    <TextView
+        android:layout_marginTop="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="37sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="4sp"
+        android:text="You used envelope for 3 hours today" />
+
+    <TextView
+        android:layout_marginTop="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="29sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="4sp"
+        android:text="Before leaving please reset your phone as the default phone app by clicking here and selecting Advanced > Phone App > Set Phone (system default)" />
+
+</LinearLayout>

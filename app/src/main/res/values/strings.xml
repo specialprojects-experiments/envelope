@@ -8,4 +8,10 @@
         <item>This app stays on your screen once you lock your phone away in the envelope, we’ll now pin it to your screen.</item>
         <item>Envelope is now pinned to your screen.\n\nTo unpin it at any time click the X in the top corner on the next screen.</item>
     </string-array>
+
+    <string-array name="onboarding_second_pass_entries">
+        <item>In order to receive calls you will need to make this app the default phone app.\n\nYou should reset this to the phone system dialer when you have finished using the app. </item>
+        <item>This app stays on your screen once you lock your phone away in the envelope, we’ll now pin it to your screen.</item>
+        <item>Envelope is now pinned to your screen.\n\nTo unpin it at any time click the X in the top corner on the next screen.</item>
+    </string-array>
 </resources>

@@ -34,6 +34,7 @@ import com.specialprojects.experiments.envelopecall.sensor.ProximitySensor
 import com.specialprojects.experiments.envelopecall.sensor.ProximityState
 import com.specialprojects.experiments.envelopecall.telephony.CallState
 import com.specialprojects.experiments.envelopecall.ui.HelpActivity
+import com.specialprojects.experiments.envelopecall.ui.StatisticsActivity
 import timber.log.Timber
 import java.util.*
 
@@ -142,6 +143,9 @@ class CallActivity : AppCompatActivity() {
 
         closeView.setOnClickListener {
             stopLockTask()
+            startActivity(
+                Intent(this@CallActivity, StatisticsActivity::class.java)
+            )
             finish()
         }
 
@@ -233,6 +237,10 @@ class CallActivity : AppCompatActivity() {
             }
         }
 
+        callBtnView.apply {
+            text = "call"
+        }
+
         clockBtnView.apply {
             setBackgroundResource(R.drawable.btn_clock_background)
             text = "clock"
@@ -251,6 +259,10 @@ class CallActivity : AppCompatActivity() {
             findViewById<TextView>(id).apply {
                 text = ""
             }
+        }
+
+        callBtnView.apply {
+            text = ""
         }
 
         clockBtnView.apply {

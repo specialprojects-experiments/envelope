@@ -33,8 +33,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.onboarding.OnboardingActivity" android:exported="true" android:screenOrientation="portrait" />
-        <activity android:name=".ui.HelpActivity" android:screenOrientation="portrait" android:exported="true"  />
+        <activity android:name=".ui.onboarding.OnboardingActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.HelpActivity" android:screenOrientation="portrait" />
         <activity android:name=".ui.SplashActivity" android:screenOrientation="portrait" android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -42,8 +42,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.CountdownActivity" android:screenOrientation="portrait"  android:exported="true"  />
+        <activity android:name=".ui.CountdownActivity" android:screenOrientation="portrait"  />
         <activity android:name=".ui.HomeActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.StatisticsActivity" android:screenOrientation="portrait" />
 
         <service android:name=".telephony.CallService"
             android:permission="android.permission.BIND_INCALL_SERVICE">

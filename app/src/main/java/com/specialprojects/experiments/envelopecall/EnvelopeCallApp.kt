@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.preference.PreferenceManager
 import androidx.lifecycle.MutableLiveData
-import com.specialprojects.experiments.envelopecall.sensor.BooleanPreference
+import com.specialprojects.experiments.envelopecall.prefs.BooleanPreference
 import com.specialprojects.experiments.envelopecall.telephony.CallState
 import timber.log.Timber
 
@@ -17,7 +17,11 @@ class EnvelopeCallApp: Application() {
 
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
 
-        onboardingPreference = BooleanPreference(preferenceManager, "completedOnboarding")
+        onboardingPreference =
+            BooleanPreference(
+                preferenceManager,
+                "completedOnboarding"
+            )
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())

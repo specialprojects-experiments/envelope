@@ -1,4 +1,4 @@
-package com.specialprojects.experiments.envelopecall.sensor
+package com.specialprojects.experiments.envelopecall.prefs
 
 import android.content.SharedPreferences
 

@@ -29,31 +29,59 @@ class OnboardingActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
 
-        val entries = resources.getStringArray(R.array.onboarding_entries)
+        val secondPass = intent.getBooleanExtra("second_pass", false)
 
-        pageIndicatorView.count = entries.size
+        if (!secondPass) {
+            val entries = resources.getStringArray(R.array.onboarding_entries)
 
-        viewPager.adapter = OnboardingAdapter().apply {
-            changeData(entries.toList())
+            pageIndicatorView.count = entries.size
+
+            viewPager.adapter = OnboardingAdapter().apply {
+                changeData(entries.toList())
+            }
+
+            viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    pageIndicatorView.selection = position
+
+                    if (position == 3) {
+                        offerReplacingDefaultDialer()
+                    } else if (position == 4 && !isAppPinned()) {
+                        startLockTask()
+                    } else if (position == pageIndicatorView.count - 1) {
+                        EnvelopeCallApp.obtain(this@OnboardingActivity).onboardingPreference.set(true)
+                        Handler().postDelayed({
+                            startActivity(Intent(this@OnboardingActivity, CountdownActivity::class.java))
+                            finish()
+                        }, 1500)
+                    }
+                }
+            })
+        } else {
+            val entries = resources.getStringArray(R.array.onboarding_second_pass_entries)
+
+            pageIndicatorView.count = entries.size
+
+            viewPager.adapter = OnboardingAdapter().apply {
+                changeData(entries.toList())
+            }
+
+            viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    pageIndicatorView.selection = position
+
+                    if (position == 1 && !isAppPinned()) {
+                        startLockTask()
+                    } else if (position == pageIndicatorView.count - 1) {
+                        Handler().postDelayed({
+                            startActivity(Intent(this@OnboardingActivity, CountdownActivity::class.java))
+                            finish()
+                        }, 2000)
+                    }
+                }
+            })
         }
 
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                pageIndicatorView.selection = position
-
-                if (position == 3) {
-                    offerReplacingDefaultDialer()
-                } else if (position == 4 && !isAppPinned()) {
-                    startLockTask()
-                } else if (position == pageIndicatorView.count - 1) {
-                    EnvelopeCallApp.obtain(this@OnboardingActivity).onboardingPreference.set(true)
-                    Handler().postDelayed({
-                        startActivity(Intent(this@OnboardingActivity, CountdownActivity::class.java))
-                        finish()
-                    }, 1500)
-                }
-            }
-        })
     }
 
     fun isAppPinned(): Boolean {

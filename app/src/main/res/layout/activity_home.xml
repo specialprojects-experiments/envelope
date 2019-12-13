@@ -12,6 +12,7 @@
         android:src="@drawable/ic_logo" />
 
     <TextView
+        android:id="@+id/making_envelope"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="37sp"

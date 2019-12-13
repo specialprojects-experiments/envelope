@@ -53,12 +53,13 @@
             />
 
         <TextView
+            android:id="@+id/making_envelope"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="#FFF"
-            android:text="To use the app you’ll need to download, print and build an envelope which fits your phone exactly. You can find this here. We currently only support the Pixel 3a."
+            android:text="To use the app you’ll need to download, print and build an envelope which fits your phone exactly. You can find this here.\n\nWe currently only support the Pixel 3a."
             />
 
         <TextView
@@ -78,7 +79,84 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="#FFF"
-            android:text="When you’re ready, simply open the app and follow the instructions before placing it in to your envelope and sealing it. Once the phone is inside it can only be used to make, receive calls and check the time, to help you take a break from your digital world. You can lock and unlock your phone using the side button, and the fingerprint sensor on the back." />
+            android:text="When you’re ready, simply open the app and follow the instructions before placing it in to your envelope and sealing it. Once the phone is inside it can only be used to make, receive calls and check the time, to help you take a break from your digital world.\n\nYou can lock and unlock your phone using the side button, and the fingerprint sensor on the back." />
+
+        <TextView
+            android:layout_marginTop="72dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textColor="#FFF"
+            android:fontFamily="@font/varela_regular"
+            android:letterSpacing="0.12"
+            android:text="SETUP SCREENS"
+            />
+
+        <TextView
+            android:id="@+id/setup_screens"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#FFF"
+            android:text="To make the setup screens appear again press here." />
+
+        <TextView
+            android:layout_marginTop="72dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textColor="#FFF"
+            android:fontFamily="@font/varela_regular"
+            android:letterSpacing="0.12"
+            android:text="DIALLING"
+            />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#FFF"
+            android:text="Just tap the numbers to dial, and press the green circle to call. This will turn red, while you are in a call, and you should press this same button to hang up.\n\nTo delete some numbers you have dialled just hold down the green dial button." />
+
+        <TextView
+            android:layout_marginTop="72dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textColor="#FFF"
+            android:fontFamily="@font/varela_regular"
+            android:letterSpacing="0.12"
+            android:text="CLOCK"
+            />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#FFF"
+            android:text="To use the clock just press the clock button and the hour and minutes will flash on your screen using the digits printed on your envelope." />
+
+        <TextView
+            android:layout_marginTop="72dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textColor="#FFF"
+            android:fontFamily="@font/varela_regular"
+            android:letterSpacing="0.12"
+            android:text="PERMISSIONS"
+            />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#FFF"
+            android:text="Envelope needs to become the default dialer on your phone. We recommend you do this only for the times you use the app, and reset the default dialer to the system one. You can do this now by clicking  here  and selecting Advanced > Phone App > Set Phone (system default)." />
 
         <TextView
             android:layout_marginTop="72dp"
@@ -107,16 +185,17 @@
             android:fontFamily="@font/varela_regular"
             android:textColor="#FFF"
             android:letterSpacing="0.12"
-            android:text="TIPS"
+            android:text="PRIVACY"
             />
 
         <TextView
+            android:id="@+id/privacy"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="#FFF"
-            android:text="To keep the Envelope app at the front of your screen we require you to manually pin the app to your screen. For up to date instructions on how to do this please visit"
+            android:text="We don’t store or record any calls or call data. To view our privacy policy click here."
             />
 
         <TextView
@@ -137,6 +216,18 @@
             android:textSize="20sp"
             android:textColor="#FFF"
             android:text="Thanks for taking the time to play with our little experiment and we’d love to hear from you if this app has helped you find a better balance with technology."
+            />
+
+        <TextView
+            android:layout_marginTop="32dp"
+            android:id="@+id/link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:background="#FFF"
+            android:textColor="#000000"
+            android:lineSpacingExtra="5sp"
+            android:text="Special Projects"
             />
 
     </LinearLayout>
