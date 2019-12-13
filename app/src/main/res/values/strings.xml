@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Envelope Call</string>
+    <string name="app_name">Envelope</string>
     <string-array name="onboarding_entries">
         <item>Envelope is an experimental app which temporarily transforms your phone into a simpler, calmer device, helping you to take a break away from your digital world.</item>
         <item>Before we begin you’ll need to print out and fold a special envelope.\n\nYou can download a pdf with instructions here</item>

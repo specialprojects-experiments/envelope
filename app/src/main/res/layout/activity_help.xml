@@ -33,7 +33,7 @@
             />
 
         <TextView
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -54,7 +54,7 @@
 
         <TextView
             android:id="@+id/making_envelope"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -74,7 +74,7 @@
             />
 
         <TextView
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -94,7 +94,7 @@
 
         <TextView
             android:id="@+id/setup_screens"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -113,7 +113,7 @@
             />
 
         <TextView
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -132,7 +132,7 @@
             />
 
         <TextView
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -151,7 +151,7 @@
             />
 
         <TextView
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -170,7 +170,7 @@
             />
 
         <TextView
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -190,7 +190,7 @@
 
         <TextView
             android:id="@+id/privacy"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -210,7 +210,7 @@
             />
 
         <TextView
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
