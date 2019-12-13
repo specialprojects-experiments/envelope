@@ -50,7 +50,7 @@ class OnboardingActivity: AppCompatActivity() {
                     Handler().postDelayed({
                         startActivity(Intent(this@OnboardingActivity, CountdownActivity::class.java))
                         finish()
-                    }, 1000)
+                    }, 1500)
                 }
             }
         })

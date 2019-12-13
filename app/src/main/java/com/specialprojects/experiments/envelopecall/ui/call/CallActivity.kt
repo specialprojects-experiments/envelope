@@ -140,7 +140,12 @@ class CallActivity : AppCompatActivity() {
             }
         })
 
-        findViewById<View>(R.id.help).setOnClickListener {
+        closeView.setOnClickListener {
+            stopLockTask()
+            finish()
+        }
+
+        helpView.setOnClickListener {
             startActivity(Intent(this, HelpActivity::class.java))
         }
 

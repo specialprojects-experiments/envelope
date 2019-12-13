@@ -27,6 +27,12 @@ class CountdownActivity: AppCompatActivity() {
         handler.post(countDownProcess)
     }
 
+    override fun onStop() {
+        super.onStop()
+
+        handler.removeCallbacks(countDownProcess)
+    }
+
     private val countDownProcess by lazy {
         object : Runnable {
             override fun run() {

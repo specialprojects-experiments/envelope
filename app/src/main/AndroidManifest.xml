@@ -43,6 +43,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.CountdownActivity" android:screenOrientation="portrait"  android:exported="true"  />
+        <activity android:name=".ui.HomeActivity" android:screenOrientation="portrait" />
 
         <service android:name=".telephony.CallService"
             android:permission="android.permission.BIND_INCALL_SERVICE">

@@ -19,7 +19,7 @@ class SplashActivity: AppCompatActivity() {
         if (!onboardingPreference.get()) {
             startActivity(Intent(this, OnboardingActivity::class.java))
         } else {
-            startActivity(Intent(this, CallActivity::class.java))
+            startActivity(Intent(this, HomeActivity::class.java))
         }
 
         finish()
