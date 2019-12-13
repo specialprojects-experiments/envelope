@@ -225,6 +225,7 @@ class CallActivity : AppCompatActivity() {
         })
 
         clockBtnView.setOnClickListener {
+            numberView.text = ""
             playAnimation()
         }
     }
