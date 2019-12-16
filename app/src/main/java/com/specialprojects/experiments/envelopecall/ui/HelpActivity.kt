@@ -8,6 +8,8 @@ import android.content.IntentFilter
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
+import android.text.Spannable
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
@@ -27,6 +29,7 @@ class HelpActivity: AppCompatActivity() {
     private val setuoView by bindView<TextView>(R.id.setup_screens)
     private val privacyView by bindView<TextView>(R.id.privacy)
     private val envelopeView by bindView<TextView>(R.id.making_envelope)
+    private val permissionsView by bindView<TextView>(R.id.permissions)
     private val linkView by bindView<TextView>(R.id.link)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +39,30 @@ class HelpActivity: AppCompatActivity() {
         findViewById<Button>(R.id.close).setOnClickListener {
             finish()
         }
+
+
+        permissionsView.text = SpannableString("Envelope needs to become the default dialer on your phone. We recommend you do this only for the times you use the app, and reset the default dialer to the system one. You can do this now by clicking here and selecting Advanced > Phone App > Set Phone (system default).").apply {
+            setSpan(
+                object: ClickableSpan() {
+                    override fun onClick(view: View) {
+                        view.context.startActivity(Intent().apply {
+                            action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                            data = Uri.fromParts("package", view.context.packageName, null)
+                        })
+                    }
+
+                    override fun updateDrawState(ds: TextPaint) {
+                        ds.isUnderlineText = false
+                        ds.bgColor = Color.WHITE
+                        ds.color = Color.BLACK
+                    }
+                },
+                200,
+                204,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+        permissionsView.movementMethod = LinkMovementMethod.getInstance()
 
         linkView.setOnClickListener {
             stopLockTask()

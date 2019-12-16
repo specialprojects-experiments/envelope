@@ -50,14 +50,13 @@ class OnboardingActivity: AppCompatActivity() {
 
                     if (position == 3) {
                         offerReplacingDefaultDialer()
-                    } else if (position == 4 && !isAppPinned()) {
-                        startLockTask()
                     } else if (position == pageIndicatorView.count - 1) {
+                        startLockTask()
                         EnvelopeCallApp.obtain(this@OnboardingActivity).onboardingPreference.set(true)
                         Handler().postDelayed({
                             startActivity(Intent(this@OnboardingActivity, CountdownActivity::class.java))
                             finish()
-                        }, 1500)
+                        }, 5000)
                     }
                 }
             })
@@ -80,7 +79,7 @@ class OnboardingActivity: AppCompatActivity() {
                         Handler().postDelayed({
                             startActivity(Intent(this@OnboardingActivity, CountdownActivity::class.java))
                             finish()
-                        }, 2000)
+                        }, 5000)
                     }
                 }
             })

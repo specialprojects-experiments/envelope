@@ -3,7 +3,6 @@
     <string-array name="onboarding_entries">
         <item>Envelope is an experimental app which temporarily transforms your phone into a simpler, calmer device, helping you to take a break away from your digital world.</item>
         <item>Before we begin you’ll need to print out and fold a special envelope.\n\nYou can download a pdf with instructions here</item>
-        <item>This app acts as a dialer to make calls, in order to use it you’ll need to give the app access to make and manage phone calls.</item>
         <item>In order to receive calls you will need to make this app the default phone app.\n\nYou should reset this to the phone system dialer when you have finished using the app. </item>
         <item>This app stays on your screen once you lock your phone away in the envelope, we’ll now pin it to your screen.</item>
         <item>Envelope is now pinned to your screen.\n\nTo unpin it at any time click the X in the top corner on the next screen.</item>

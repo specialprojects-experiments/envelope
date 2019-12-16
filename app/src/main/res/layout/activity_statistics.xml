@@ -24,6 +24,7 @@
         android:text="You used envelope for 3 hours today" />
 
     <TextView
+        android:id="@+id/description"
         android:layout_marginTop="37dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

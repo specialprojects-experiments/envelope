@@ -156,6 +156,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="#FFF"
+            android:id="@+id/permissions"
             android:text="Envelope needs to become the default dialer on your phone. We recommend you do this only for the times you use the app, and reset the default dialer to the system one. You can do this now by clicking  here  and selecting Advanced > Phone App > Set Phone (system default)." />
 
         <TextView

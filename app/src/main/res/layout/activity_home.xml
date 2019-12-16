@@ -16,24 +16,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="37sp"
-        android:background="#FFF"
         android:textColor="#000000"
         android:lineSpacingExtra="2sp"
-        android:text="Print an Envelope"
-        android:layout_gravity="center"
+        android:text="Print an\nEnvelope"
+        android:layout_marginStart="51dp"
+        android:layout_gravity="center_vertical"
         />
 
     <TextView
         android:id="@+id/use_envelope"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="128dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="156dp"
+        android:layout_marginStart="51dp"
         android:textSize="37sp"
-        android:background="#FFF"
         android:textColor="#000000"
         android:lineSpacingExtra="2sp"
-        android:text="Use Envelope now"
+        android:text="Use Envelope\nnow"
         />
 
     <TextView

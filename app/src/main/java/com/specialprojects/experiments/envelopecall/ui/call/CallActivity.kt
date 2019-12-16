@@ -5,36 +5,30 @@ import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
-import android.app.role.RoleManager
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.*
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.telecom.TelecomManager
 import android.telecom.VideoProfile
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.addListener
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import com.specialprojects.experiments.envelopecall.EnvelopeCallApp
 import com.specialprojects.experiments.envelopecall.R
-import com.specialprojects.experiments.envelopecall.ui.util.bindView
+import com.specialprojects.experiments.envelopecall.audio.SoundPoolHolder.playSound
 import com.specialprojects.experiments.envelopecall.sensor.ProximitySensor
 import com.specialprojects.experiments.envelopecall.sensor.ProximityState
 import com.specialprojects.experiments.envelopecall.telephony.CallState
 import com.specialprojects.experiments.envelopecall.ui.HelpActivity
 import com.specialprojects.experiments.envelopecall.ui.StatisticsActivity
+import com.specialprojects.experiments.envelopecall.ui.util.bindView
 import timber.log.Timber
 import java.util.*
 
@@ -49,10 +43,11 @@ class CallActivity : AppCompatActivity() {
     private val closeView by bindView<Button>(R.id.close)
     private val helpView by bindView<TextView>(R.id.help)
 
+    private val contentView by bindView<View>(R.id.content)
+
     private val handler = Handler()
 
     private lateinit var proximitySensor: ProximitySensor
-    private lateinit var soundPool: SoundPool
 
     private val idActionMap = mapOf(
         R.id.one to "1",
@@ -69,61 +64,6 @@ class CallActivity : AppCompatActivity() {
         R.id.hash to "#"
     )
 
-    private val idSoundMap = mapOf(
-        R.id.one to R.raw.dtmf_1,
-        R.id.two to R.raw.dtmf_2,
-        R.id.three to R.raw.dtmf_3,
-        R.id.four to R.raw.dtmf_4,
-        R.id.five to R.raw.dtmf_5,
-        R.id.six to R.raw.dtmf_6,
-        R.id.seven to R.raw.dtmf_7,
-        R.id.eight to R.raw.dtmf_8,
-        R.id.nine to R.raw.dtmf_9,
-        R.id.zero to R.raw.dtmf_0,
-        R.id.star to R.raw.dtmf_star,
-        R.id.hash to R.raw.dtmf_hash
-    )
-
-    private val clockSoundMap = mapOf(
-        4 to R.raw.hour_1,
-        5 to R.raw.hour_2,
-        7 to R.raw.minutes_1,
-        8 to R.raw.minutes_2
-    )
-
-    private val tonePool = mutableMapOf<Int, Int>()
-
-    fun playSound(id: Int){
-        tonePool[id]?.let {
-            soundPool.play(it, 1f, 1f, 1, 0, 1f)
-        }
-    }
-
-    fun createSoundPool() {
-        val attributes = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_GAME)
-            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-            .build()
-
-        soundPool = SoundPool.Builder()
-            .setMaxStreams(2)
-            .setAudioAttributes(attributes)
-            .build()
-
-        tonePool.clear()
-        tonePool.apply {
-            for(i in idSoundMap) {
-                val soundId = soundPool.load(this@CallActivity, i.value, 1)
-                put(i.key, soundId)
-            }
-
-            for(i in clockSoundMap) {
-                val soundId = soundPool.load(this@CallActivity, i.value, 1)
-                put(i.key, soundId)
-            }
-        }
-    }
-
     override fun onStart() {
         super.onStart()
 
@@ -135,7 +75,18 @@ class CallActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
-        createSoundPool()
+        backgroundFadeAnimation()
+    }
+
+    fun backgroundFadeAnimation() {
+        contentView.alpha = 1F
+        ObjectAnimator.ofFloat(contentView, "alpha", 1F, 0F).apply {
+            duration = 800
+            addListener(onStart = {
+                playSound(6)
+            })
+            startDelay = 150
+        }.start()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -427,6 +378,5 @@ class CallActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        soundPool.release()
     }
 }

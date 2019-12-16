@@ -1,10 +1,15 @@
 package com.specialprojects.experiments.envelopecall.ui
 
 import android.content.Intent
-import android.net.Uri
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.BackgroundColorSpan
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.specialprojects.experiments.envelopecall.FileDownloader
 import com.specialprojects.experiments.envelopecall.R
 import com.specialprojects.experiments.envelopecall.ui.onboarding.OnboardingActivity
 import com.specialprojects.experiments.envelopecall.ui.util.bindView
@@ -22,18 +27,23 @@ class HomeActivity: AppCompatActivity() {
             startActivity(Intent(this, HelpActivity::class.java))
         }
 
+        useView.text = SpannableString("Use Envelope\nnow").apply {
+            setSpan(BackgroundColorSpan(Color.WHITE), 0, "Use Envelope\nnow".length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+
         useView.setOnClickListener {
             startActivity(Intent(this, OnboardingActivity::class.java).apply {
                 putExtra("second_pass", true)
             })
         }
 
+        makeEnvelopeView.text = SpannableString("Print an\nEnvelope").apply {
+            setSpan(BackgroundColorSpan(Color.WHITE), 0, "Print an\nEnvelope".length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+
         makeEnvelopeView.setOnClickListener {
-            startActivity(
-                Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.parse("https://www.dropbox.com/s/x47ks1d41bcgbhd/Google_Envelope_wireframesv3.pdf?dl=1")
-                }
-            )
+            FileDownloader.maybeStartDownload(this,"https://s3-eu-west-1.amazonaws.com/media.designersfriend.co.uk/sps/media/uploads/misc/downloads/google-unplugged-envelope-instructions.pdf")
+            Toast.makeText(this, "Starting download", Toast.LENGTH_LONG).show()
         }
     }
 }

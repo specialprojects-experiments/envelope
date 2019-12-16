@@ -7,6 +7,6 @@
     android:paddingEnd="51dp"
     android:textSize="37sp"
     android:textColor="#ffffff"
-    android:lineSpacingExtra="2sp"
+    android:lineSpacingMultiplier=".85"
     tools:text="Envelope temporarily transforms your phone into a simpler, calmer device, helping you to take a break away from your digital world."
     xmlns:android="http://schemas.android.com/apk/res/android" />

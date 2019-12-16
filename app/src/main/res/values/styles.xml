@@ -9,10 +9,19 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">#000</item>
         <item name="android:fontFamily">@font/dmsans_regular</item>
+        <item name="android:textViewStyle">@style/TextView</item>
+    </style>
+
+    <style name="TextView" parent="Widget.AppCompat.TextView">
+        <item name="android:lineSpacingMultiplier">0.95</item>
     </style>
 
     <style name="DialButton">
         <item name="android:background">@drawable/btn_dial_background</item>
+    </style>
+
+    <style name="DialButton.Black" parent="DialButton">
+        <item name="android:background">@drawable/btn_dial_background_black</item>
     </style>
 
     <style name="SplashTheme" parent="AppTheme">

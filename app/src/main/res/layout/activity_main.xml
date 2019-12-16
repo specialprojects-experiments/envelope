@@ -6,6 +6,150 @@
     android:background="#000"
     tools:context=".ui.call.CallActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/content"
+        android:background="#FFF"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_marginTop="220dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                style="@style/DialButton.Black"
+                android:textSize="24sp"
+                android:text="1" />
+
+            <View
+                android:layout_marginStart="26dp"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                style="@style/DialButton.Black"
+                android:textSize="24sp"
+                android:text="2" />
+
+            <View
+                android:layout_marginStart="26dp"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                style="@style/DialButton.Black"
+                android:textSize="24sp"
+                android:text="3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="27dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                style="@style/DialButton.Black"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:textSize="24sp"
+                android:text="4" />
+
+            <View
+                android:layout_marginStart="26dp"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:textSize="24sp"
+                style="@style/DialButton.Black"
+                android:text="5" />
+
+            <View
+                android:layout_marginStart="26dp"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:textSize="24sp"
+                style="@style/DialButton.Black"
+                android:text="6" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="27dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                style="@style/DialButton.Black"
+                android:textSize="24sp"
+                android:text="7" />
+
+            <View
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginStart="26dp"
+                style="@style/DialButton.Black"
+                android:textSize="24sp"
+                android:text="8" />
+
+            <View
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginStart="26dp"
+                style="@style/DialButton.Black"
+                android:textSize="24sp"
+                android:text="9" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="27dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                style="@style/DialButton.Black"
+                android:textSize="24sp"
+                android:text="*" />
+
+            <View
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginStart="26dp"
+                style="@style/DialButton.Black"
+                android:textSize="24sp"
+                android:text="0" />
+
+            <View
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginStart="26dp"
+                style="@style/DialButton.Black"
+                android:textSize="24sp"
+                android:text="#" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="175dp"
+            style="@style/DialButton.Black"
+            android:textAllCaps="true"
+            android:text="clock"
+            android:letterSpacing=".13"
+            android:textSize="11sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/button_size" />
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/close"
         android:layout_marginTop="46dp"

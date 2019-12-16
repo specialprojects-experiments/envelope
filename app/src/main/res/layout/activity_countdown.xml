@@ -16,7 +16,7 @@
         android:layout_weight="1"
         android:textSize="37sp"
         android:textColor="#ffffff"
-        android:lineSpacingExtra="2sp"
+        android:lineSpacingMultiplier=".85"
         android:text="Now place the phone in your envelope and seal it.\n\nYou can lock and unlock your phone using the fingerprint sensor at any time and dial a number." />
 
     <TextView
