@@ -1,5 +1,6 @@
 package com.specialprojects.experiments.envelopecall.ui
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -25,6 +26,10 @@ class CountdownActivity: AppCompatActivity() {
         setContentView(R.layout.activity_countdown)
 
         handler.post(countDownProcess)
+
+        ObjectAnimator.ofFloat(instructionsView, "alpha", alpha, 0F).apply {
+            duration = 11000
+        }.start()
     }
 
     override fun onStop() {
@@ -42,8 +47,6 @@ class CountdownActivity: AppCompatActivity() {
                 alpha -= 0.1F
 
                 countdownView.text = "$seconds"
-
-                countdownView.alpha = alpha
                 instructionsView.alpha = alpha
 
                 if (countDown > 0) {
