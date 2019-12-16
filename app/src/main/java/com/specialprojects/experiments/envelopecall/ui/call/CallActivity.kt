@@ -182,19 +182,13 @@ class CallActivity : AppCompatActivity() {
             }
         }
 
-        numberView.addTextChangedListener(afterTextChanged = { result ->
-            result?.let {
-                callBtnView.alpha = if (it.isNotEmpty()) 1F else 0F
-            }
-        })
-
         defaultCallHandle()
 
         (applicationContext as EnvelopeCallApp).callState.observe(this, Observer { callState ->
             when(callState) {
                 CallState.Default -> {
+                    callBtnView.text = "call"
                     callBtnView.isSelected = false
-                    callBtnView.alpha = 0F
                     currentAnimation?.end()
                     defaultCallHandle()
                 }
@@ -217,6 +211,7 @@ class CallActivity : AppCompatActivity() {
                     currentAnimation?.start()
                 }
                 is CallState.Dialing -> {
+                    callBtnView.text = "end"
                     callBtnView.apply {
                         setOnClickListener {
                             callState.call.disconnect()
@@ -224,8 +219,8 @@ class CallActivity : AppCompatActivity() {
                     }
                 }
                 is CallState.Active -> {
+                    callBtnView.text = "end"
                     callBtnView.apply {
-                        alpha = 1F
                         isSelected = true
                         setOnClickListener {
                             callState.call.disconnect()
@@ -251,15 +246,6 @@ class CallActivity : AppCompatActivity() {
             }
         }
 
-        callBtnView.apply {
-            text = "call"
-        }
-
-        clockBtnView.apply {
-            setBackgroundResource(R.drawable.btn_clock_background)
-            text = "clock"
-        }
-
         closeView.visibility = View.VISIBLE
         helpView.visibility = View.VISIBLE
     }
@@ -273,10 +259,6 @@ class CallActivity : AppCompatActivity() {
             findViewById<TextView>(id).apply {
                 text = ""
             }
-        }
-
-        callBtnView.apply {
-            text = ""
         }
 
         clockBtnView.apply {
@@ -359,12 +341,9 @@ class CallActivity : AppCompatActivity() {
 
     @SuppressLint("MissingPermission")
     private fun defaultCallHandle() {
-        callBtnView.alpha = 0F
-
         numberView.text = ""
 
         callBtnView.apply {
-            alpha = 0F
             setOnClickListener {
                 val number = numberView.text.toString()
                 Timber.d("Calling number: $number")
@@ -422,17 +401,17 @@ class CallActivity : AppCompatActivity() {
     private fun createPulseAnimation() {
         val callButton = findViewById<Button>(R.id.call)
 
-        callBtnView.alpha = 1F
-
         currentAnimation = ObjectAnimator.ofFloat(callButton, "alpha", 0F).apply {
             duration = 300
             repeatCount = ValueAnimator.INFINITE
             repeatMode = ValueAnimator.REVERSE
         }
 
-        currentAnimation?.addListener(onEnd = {
-            callButton.alpha = 1F
-        })
+        currentAnimation?.addListener(
+            onEnd = {
+                callBtnView.alpha = 1F
+            }
+        )
     }
 
     override fun onResume() {
