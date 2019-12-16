@@ -2,9 +2,12 @@ package com.specialprojects.experiments.envelopecall.ui.onboarding
 
 import android.annotation.SuppressLint
 import android.app.ActivityManager
+import android.app.DownloadManager
 import android.app.role.RoleManager
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -15,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.rd.PageIndicatorView
 import com.specialprojects.experiments.envelopecall.EnvelopeCallApp
+import com.specialprojects.experiments.envelopecall.FileDownloader
 import com.specialprojects.experiments.envelopecall.R
 import com.specialprojects.experiments.envelopecall.ui.CountdownActivity
 import com.specialprojects.experiments.envelopecall.ui.util.bindView
@@ -120,10 +124,26 @@ class OnboardingActivity: AppCompatActivity() {
     }
 
     fun onLinkClicked() {
-        startActivity(
-            Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("https://www.dropbox.com/s/x47ks1d41bcgbhd/Google_Envelope_wireframesv3.pdf?dl=1")
+        FileDownloader.maybeStartDownload(this,"https://s3-eu-west-1.amazonaws.com/media.designersfriend.co.uk/sps/media/uploads/misc/downloads/google-unplugged-envelope-instructions.pdf")
+        Toast.makeText(this, "Starting download", Toast.LENGTH_LONG).show()
+    }
+
+    private val downloadReceiver: BroadcastReceiver by lazy {
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                startActivity(Intent(DownloadManager.ACTION_VIEW_DOWNLOADS))
             }
-        )
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val filter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+        registerReceiver(downloadReceiver, filter)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(downloadReceiver)
     }
 }
