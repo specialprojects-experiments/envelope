@@ -84,6 +84,13 @@ class CallActivity : AppCompatActivity() {
         R.id.hash to R.raw.dtmf_hash
     )
 
+    private val clockSoundMap = mapOf(
+        4 to R.raw.hour_1,
+        5 to R.raw.hour_2,
+        7 to R.raw.minutes_1,
+        8 to R.raw.minutes_2
+    )
+
     private val tonePool = mutableMapOf<Int, Int>()
 
     fun playSound(id: Int){
@@ -99,12 +106,18 @@ class CallActivity : AppCompatActivity() {
             .build()
 
         soundPool = SoundPool.Builder()
+            .setMaxStreams(2)
             .setAudioAttributes(attributes)
             .build()
 
         tonePool.clear()
         tonePool.apply {
             for(i in idSoundMap) {
+                val soundId = soundPool.load(this@CallActivity, i.value, 1)
+                put(i.key, soundId)
+            }
+
+            for(i in clockSoundMap) {
                 val soundId = soundPool.load(this@CallActivity, i.value, 1)
                 put(i.key, soundId)
             }
@@ -301,33 +314,41 @@ class CallActivity : AppCompatActivity() {
             listIds.add(id.key)
         }
 
+        playSound(4)
         dialUpAnimation(listIds[0])
 
         handler.postDelayed({
+            playSound(5)
             dialUpAnimation(listIds[1])
         }, 300)
 
         handler.postDelayed({
+            playSound(7)
             dialUpAnimation(listIds[2])
         }, 800)
 
         handler.postDelayed({
+            playSound(8)
             dialUpAnimation(listIds[3])
         }, 1100)
 
         handler.postDelayed({
+            playSound(4)
             dialUpAnimation(listIds[0])
         }, 1800)
 
         handler.postDelayed({
+            playSound(5)
             dialUpAnimation(listIds[1])
         }, 2100)
 
         handler.postDelayed({
+            playSound(7)
             dialUpAnimation(listIds[2])
         }, 2600)
 
         handler.postDelayed({
+            playSound(8)
             dialUpAnimation(listIds[3])
         }, 2900)
 
