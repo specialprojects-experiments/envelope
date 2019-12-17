@@ -202,6 +202,11 @@ class CallActivity : AppCompatActivity() {
             }
         }
 
+        clockBtnView.apply {
+            setBackgroundResource(R.drawable.btn_clock_background)
+            text = "clock"
+        }
+
         closeView.visibility = View.VISIBLE
         helpView.visibility = View.VISIBLE
     }
@@ -273,26 +278,26 @@ class CallActivity : AppCompatActivity() {
         handler.postDelayed({
             playSound(4)
             dialUpAnimation(listIds[0])
-        }, 1800)
+        }, 2300)
 
         handler.postDelayed({
             playSound(5)
             dialUpAnimation(listIds[1])
-        }, 2100)
+        }, 2600)
 
         handler.postDelayed({
             playSound(7)
             dialUpAnimation(listIds[2])
-        }, 2600)
+        }, 3100)
 
         handler.postDelayed({
             playSound(8)
             dialUpAnimation(listIds[3])
-        }, 2900)
+        }, 3400)
 
         handler.postDelayed({
             clockBtnView.isSelected = false
-        }, 3300)
+        }, 3700)
     }
 
     @SuppressLint("MissingPermission")
