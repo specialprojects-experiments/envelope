@@ -5,8 +5,10 @@ import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.AudioManager
 import android.os.Bundle
 import android.os.Handler
 import android.telecom.VideoProfile
@@ -96,6 +98,8 @@ class CallActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setVolume()
 
         proximitySensor = ProximitySensor(this)
         proximitySensor.state.observe(this, Observer {
@@ -392,5 +396,19 @@ class CallActivity : AppCompatActivity() {
         val countSeconds = ((System.currentTimeMillis() - onStartTime ) / 1000)
 
         EnvelopeCallApp.obtain(this).appendUsage(countSeconds)
+    }
+
+    fun setVolume() {
+        val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+        val maxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+
+        val volume = (maxVolume.toDouble() * 0.8).toInt()
+
+        am.setStreamVolume(
+            AudioManager.STREAM_MUSIC,
+            volume,
+            0
+        )
     }
 }
