@@ -138,16 +138,19 @@ class CallActivity : AppCompatActivity() {
         (applicationContext as EnvelopeCallApp).callState.observe(this, Observer { callState ->
             when(callState) {
                 CallState.Default -> {
-                    callBtnView.text = "call"
-                    callBtnView.isSelected = false
+                    callBtnView.apply {
+                        text = "call"
+                        isSelected = false
+                        isActivated = false
+                    }
                     currentAnimation?.end()
                     defaultCallHandle()
                 }
 
                 is CallState.Ringing -> {
                     createPulseAnimation()
-
                     callBtnView.apply {
+                        isActivated = true
                         setOnClickListener {
                             callState.call.answer(VideoProfile.STATE_AUDIO_ONLY)
                             currentAnimation?.end()
@@ -162,16 +165,18 @@ class CallActivity : AppCompatActivity() {
                     currentAnimation?.start()
                 }
                 is CallState.Dialing -> {
-                    callBtnView.text = "end"
                     callBtnView.apply {
+                        text = "end"
+                        isActivated = true
                         setOnClickListener {
                             callState.call.disconnect()
                         }
                     }
                 }
                 is CallState.Active -> {
-                    callBtnView.text = "end"
                     callBtnView.apply {
+                        text = "end"
+                        isActivated = true
                         isSelected = true
                         setOnClickListener {
                             callState.call.disconnect()
