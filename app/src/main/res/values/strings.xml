@@ -15,4 +15,6 @@
         <item>Envelope is now pinned to your screen.\n\nTo unpin it at any time click the X in the top corner on the next screen.</item>
         <item>Now place the phone in your envelope and seal it.\n\nYou can lock and unlock your phone using the fingerprint sensor at any time and dial a number.</item>
     </string-array>
+
+    <string name="usage">You used envelope for %s today</string>
 </resources>

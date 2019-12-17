@@ -47,6 +47,10 @@ class CallActivity : AppCompatActivity() {
 
     private val handler = Handler()
 
+    private var usageCount: Long = 0L
+
+    private var onStartTime: Long = 0L
+
     private lateinit var proximitySensor: ProximitySensor
 
     private val idActionMap = mapOf(
@@ -85,7 +89,7 @@ class CallActivity : AppCompatActivity() {
             addListener(onStart = {
                 playSound(6)
             })
-            startDelay = 150
+            //startDelay = 150
         }.start()
     }
 
@@ -378,15 +382,15 @@ class CallActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+        onStartTime = System.currentTimeMillis()
         proximitySensor.startListening()
     }
 
     override fun onPause() {
         super.onPause()
         proximitySensor.stopListening()
-    }
+        val countSeconds = ((System.currentTimeMillis() - onStartTime ) / 1000)
 
-    override fun onStop() {
-        super.onStop()
+        EnvelopeCallApp.obtain(this).appendUsage(countSeconds)
     }
 }

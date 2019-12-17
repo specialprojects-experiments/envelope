@@ -15,13 +15,14 @@
         android:src="@drawable/ic_logo" />
 
     <TextView
+        android:id="@+id/usage"
         android:layout_marginTop="37dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="37sp"
         android:textColor="#000000"
         android:lineSpacingExtra="4sp"
-        android:text="You used envelope for 3 hours today" />
+        android:text="@string/usage" />
 
     <TextView
         android:id="@+id/description"

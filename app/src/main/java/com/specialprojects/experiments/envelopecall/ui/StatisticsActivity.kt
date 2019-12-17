@@ -13,7 +13,9 @@ import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.specialprojects.experiments.envelopecall.EnvelopeCallApp
 import com.specialprojects.experiments.envelopecall.R
+import timber.log.Timber
 
 class StatisticsActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +27,19 @@ class StatisticsActivity: AppCompatActivity() {
                 setSpan(CustomClickableSpan(), 76, 80, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
             movementMethod = LinkMovementMethod.getInstance()
+        }
+
+        findViewById<TextView>(R.id.usage).apply {
+            val usageSeconds = EnvelopeCallApp.obtain(this@StatisticsActivity).usagePreference.get()
+
+            Timber.d("Usage in seconds: $usageSeconds")
+
+            val minutes = usageSeconds / 60
+
+            val hours = minutes / 60
+
+            val usageText = if (hours == 0L) "$minutes minute${if(minutes > 1) "s" else ""}" else "$hours hour${if(hours > 1) "s" else ""}"
+            text = getString(R.string.usage, usageText)
         }
     }
 

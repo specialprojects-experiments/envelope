@@ -7,11 +7,13 @@ import android.preference.PreferenceManager
 import androidx.lifecycle.MutableLiveData
 import com.specialprojects.experiments.envelopecall.audio.SoundPoolHolder
 import com.specialprojects.experiments.envelopecall.prefs.BooleanPreference
+import com.specialprojects.experiments.envelopecall.prefs.LongPreference
 import com.specialprojects.experiments.envelopecall.telephony.CallState
 import timber.log.Timber
 
 class EnvelopeCallApp: Application() {
     lateinit var onboardingPreference: BooleanPreference
+    lateinit var usagePreference: LongPreference
     val callState = MutableLiveData<CallState>()
 
     override fun onCreate() {
@@ -25,12 +27,23 @@ class EnvelopeCallApp: Application() {
                 "completedOnboarding"
             )
 
+        usagePreference =
+            LongPreference(
+                preferenceManager,
+                "usageAccess"
+            )
+
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
 
         SoundPoolHolder.init()
         SoundPoolHolder.loadSounds(this)
+    }
+
+    fun appendUsage(usage: Long) {
+        val current = usagePreference.get()
+        usagePreference.set(current + usage)
     }
 
     override fun onLowMemory() {
