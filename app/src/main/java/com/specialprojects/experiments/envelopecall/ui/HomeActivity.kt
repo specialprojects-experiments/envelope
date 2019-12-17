@@ -1,6 +1,10 @@
 package com.specialprojects.experiments.envelopecall.ui
 
+import android.app.DownloadManager
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
@@ -45,6 +49,25 @@ class HomeActivity: AppCompatActivity() {
         makeEnvelopeView.setOnClickListener {
             FileDownloader.maybeStartDownload(this, PDF_URL)
             Toast.makeText(this, "Starting download", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val filter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+        registerReceiver(downloadReceiver, filter)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(downloadReceiver)
+    }
+
+    private val downloadReceiver: BroadcastReceiver by lazy {
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                startActivity(Intent(DownloadManager.ACTION_VIEW_DOWNLOADS))
+            }
         }
     }
 }
