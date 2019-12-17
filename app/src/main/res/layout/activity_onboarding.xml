@@ -13,18 +13,36 @@
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
-    <com.rd.PageIndicatorView
-        android:layout_marginBottom="36dp"
-        android:layout_marginStart="52dp"
-        android:id="@+id/pageIndicatorView"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:paddingStart="51dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        app:piv_animationType="slide"
-        app:piv_interactiveAnimation="true"
-        app:piv_selectedColor="#FFF"
-        app:piv_unselectedColor="#66FFFFFF"
-        app:piv_padding="5dp"
-        app:piv_radius="2dp" />
+        android:layout_weight="0">
+
+        <com.rd.PageIndicatorView
+            android:layout_marginBottom="36dp"
+            android:id="@+id/pageIndicatorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:piv_animationType="slide"
+            app:piv_interactiveAnimation="true"
+            app:piv_selectedColor="#FFF"
+            app:piv_unselectedColor="#66FFFFFF"
+            app:piv_padding="5dp"
+            app:piv_radius="2dp" />
+
+        <TextView
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/countdown"
+            android:textSize="55sp"
+            android:layout_marginBottom="32dp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="-13sp"
+            android:text="10"
+            />
+
+    </FrameLayout>
 
 </LinearLayout>

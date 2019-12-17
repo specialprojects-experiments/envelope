@@ -1,5 +1,6 @@
 package com.specialprojects.experiments.envelopecall.ui.onboarding
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.app.DownloadManager
@@ -8,11 +9,12 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.telecom.TelecomManager
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -20,7 +22,7 @@ import com.rd.PageIndicatorView
 import com.specialprojects.experiments.envelopecall.EnvelopeCallApp
 import com.specialprojects.experiments.envelopecall.FileDownloader
 import com.specialprojects.experiments.envelopecall.R
-import com.specialprojects.experiments.envelopecall.ui.CountdownActivity
+import com.specialprojects.experiments.envelopecall.ui.call.CallActivity
 import com.specialprojects.experiments.envelopecall.ui.util.bindView
 
 class OnboardingActivity: AppCompatActivity() {
@@ -28,6 +30,14 @@ class OnboardingActivity: AppCompatActivity() {
 
     private val viewPager by bindView<ViewPager2>(R.id.viewPager)
     private val pageIndicatorView by bindView<PageIndicatorView>(R.id.pageIndicatorView)
+    private val countdownView by bindView<TextView>(R.id.countdown)
+
+    private var countDown = 11000
+    private val delayInterval = 1000
+
+    private val handler = Handler()
+
+    private var alpha = 1F
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,12 +61,7 @@ class OnboardingActivity: AppCompatActivity() {
                     if (position == 3) {
                         offerReplacingDefaultDialer()
                     } else if (position == pageIndicatorView.count - 1) {
-                        startLockTask()
-                        EnvelopeCallApp.obtain(this@OnboardingActivity).onboardingPreference.set(true)
-                        Handler().postDelayed({
-                            startActivity(Intent(this@OnboardingActivity, CountdownActivity::class.java))
-                            finish()
-                        }, 5000)
+                        startCountdown()
                     }
                 }
             })
@@ -76,15 +81,46 @@ class OnboardingActivity: AppCompatActivity() {
                     if (position == 1 && !isAppPinned()) {
                         startLockTask()
                     } else if (position == pageIndicatorView.count - 1) {
-                        Handler().postDelayed({
-                            startActivity(Intent(this@OnboardingActivity, CountdownActivity::class.java))
-                            finish()
-                        }, 5000)
+                        startCountdown()
                     }
                 }
             })
         }
+    }
 
+    fun startCountdown() {
+        viewPager.isUserInputEnabled = false
+        pageIndicatorView.visibility = View.INVISIBLE
+        countdownView.visibility = View.VISIBLE
+
+        handler.post(countDownProcess)
+
+        EnvelopeCallApp.obtain(this).onboardingPreference.set(true)
+
+        ObjectAnimator.ofFloat(viewPager, "alpha", alpha, 0F).apply {
+            duration = 11000
+        }.start()
+    }
+
+    private val countDownProcess by lazy {
+        object : Runnable {
+            override fun run() {
+                countDown -= delayInterval
+                val seconds = (countDown / 1000)
+
+                alpha -= 0.1F
+
+                countdownView.text = "$seconds"
+                viewPager.alpha = alpha
+
+                if (countDown > 0) {
+                    handler.postDelayed(this, delayInterval.toLong())
+                } else {
+                    startActivity(Intent(this@OnboardingActivity, CallActivity::class.java))
+                    finish()
+                }
+            }
+        }
     }
 
     fun isAppPinned(): Boolean {
