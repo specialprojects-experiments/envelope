@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.telecom.VideoProfile
 import android.view.View
+import android.view.ViewTreeObserver
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
@@ -85,14 +86,20 @@ class CallActivity : AppCompatActivity() {
     }
 
     fun backgroundFadeAnimation() {
-        contentView.alpha = 1F
-        ObjectAnimator.ofFloat(contentView, "alpha", 1F, 0F).apply {
-            duration = 800
-            addListener(onStart = {
-                playSound(6)
-            })
-            //startDelay = 150
-        }.start()
+        window.decorView.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                contentView.alpha = 1F
+                val animator = ObjectAnimator.ofFloat(contentView, "alpha", 1F, 0F).apply {
+                    duration = 800
+                    //startDelay = 150
+                }
+                animator.addListener(onStart = {
+                    playSound(6)
+                })
+                animator.start()
+                window.decorView.viewTreeObserver.removeOnGlobalLayoutListener(this)
+            }
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -147,7 +154,7 @@ class CallActivity : AppCompatActivity() {
             when(callState) {
                 CallState.Default -> {
                     callBtnView.apply {
-                        text = "call"
+                        text = if (isNear()) "" else "call"
                         isSelected = false
                         isActivated = false
                     }
@@ -174,7 +181,7 @@ class CallActivity : AppCompatActivity() {
                 }
                 is CallState.Dialing -> {
                     callBtnView.apply {
-                        text = "end"
+                        text = if (isNear()) "" else "end"
                         isActivated = true
                         setOnClickListener {
                             callState.call.disconnect()
@@ -183,7 +190,7 @@ class CallActivity : AppCompatActivity() {
                 }
                 is CallState.Active -> {
                     callBtnView.apply {
-                        text = "end"
+                        text = if (isNear()) "" else "end"
                         isActivated = true
                         isSelected = true
                         setOnClickListener {
@@ -215,6 +222,11 @@ class CallActivity : AppCompatActivity() {
             text = "clock"
         }
 
+        callBtnView.apply {
+            setBackgroundResource(R.drawable.call_button_state)
+            text = "call"
+        }
+
         closeView.visibility = View.VISIBLE
         helpView.visibility = View.VISIBLE
     }
@@ -228,6 +240,11 @@ class CallActivity : AppCompatActivity() {
             findViewById<TextView>(id).apply {
                 text = ""
             }
+        }
+
+        callBtnView.apply {
+            setBackgroundResource(R.drawable.call_button_ready_state)
+            text = ""
         }
 
         clockBtnView.apply {
@@ -381,6 +398,10 @@ class CallActivity : AppCompatActivity() {
                 callBtnView.alpha = 1F
             }
         )
+    }
+
+    fun isNear(): Boolean {
+        return proximitySensor.state.value == ProximityState.Near
     }
 
     override fun onResume() {
