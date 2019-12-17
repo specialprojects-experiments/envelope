@@ -21,6 +21,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.rd.PageIndicatorView
 import com.specialprojects.experiments.envelopecall.EnvelopeCallApp
 import com.specialprojects.experiments.envelopecall.FileDownloader
+import com.specialprojects.experiments.envelopecall.PDF_URL
 import com.specialprojects.experiments.envelopecall.R
 import com.specialprojects.experiments.envelopecall.ui.call.CallActivity
 import com.specialprojects.experiments.envelopecall.ui.util.bindView
@@ -159,7 +160,7 @@ class OnboardingActivity: AppCompatActivity() {
     }
 
     fun onLinkClicked() {
-        FileDownloader.maybeStartDownload(this,"https://s3-eu-west-1.amazonaws.com/media.designersfriend.co.uk/sps/media/uploads/misc/downloads/google-unplugged-envelope-instructions.pdf")
+        FileDownloader.maybeStartDownload(this, PDF_URL)
         Toast.makeText(this, "Starting download", Toast.LENGTH_LONG).show()
     }
 

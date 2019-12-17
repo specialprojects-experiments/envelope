@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.specialprojects.experiments.envelopecall.FileDownloader
+import com.specialprojects.experiments.envelopecall.PDF_URL
 import com.specialprojects.experiments.envelopecall.R
 import com.specialprojects.experiments.envelopecall.ui.onboarding.OnboardingActivity
 import com.specialprojects.experiments.envelopecall.ui.util.bindView
@@ -42,7 +43,7 @@ class HomeActivity: AppCompatActivity() {
         }
 
         makeEnvelopeView.setOnClickListener {
-            FileDownloader.maybeStartDownload(this,"https://s3-eu-west-1.amazonaws.com/media.designersfriend.co.uk/sps/media/uploads/misc/downloads/google-unplugged-envelope-instructions.pdf")
+            FileDownloader.maybeStartDownload(this, PDF_URL)
             Toast.makeText(this, "Starting download", Toast.LENGTH_LONG).show()
         }
     }
