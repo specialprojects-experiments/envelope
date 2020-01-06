@@ -59,10 +59,8 @@ class OnboardingActivity: AppCompatActivity() {
                 override fun onPageSelected(position: Int) {
                     pageIndicatorView.selection = position
 
-                    if (position == 3) {
+                    if (position == 2) {
                         offerReplacingDefaultDialer()
-                    } else if (position == 4) {
-                        startLockTask()
                     } else if (position == pageIndicatorView.count - 1) {
                         startCountdown()
                     }
@@ -81,11 +79,8 @@ class OnboardingActivity: AppCompatActivity() {
                 override fun onPageSelected(position: Int) {
                     pageIndicatorView.selection = position
 
-                    if (position == 1) {
+                    if (position == pageIndicatorView.count - 1) {
                         offerReplacingDefaultDialer()
-                    } else if (position == 2 && !isAppPinned()) {
-                        startLockTask()
-                    } else if (position == pageIndicatorView.count - 1) {
                         startCountdown()
                     }
                 }

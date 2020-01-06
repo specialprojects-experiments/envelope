@@ -27,7 +27,7 @@ class OnboardingAdapter: BindableAdapter<String, BindableAdapter.ViewHolder<Stri
         override fun bind(item: String, position: Int)  {
 
             (itemView as TextView).apply {
-                if (position == 1 && item.length > 115) {
+                if (item.length == 116) {
                     val string = SpannableString(item)
                     string.setSpan(CustomClickableSpan(), 111, 116, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                     text = string

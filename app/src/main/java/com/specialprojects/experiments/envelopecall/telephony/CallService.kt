@@ -1,11 +1,13 @@
 package com.specialprojects.experiments.envelopecall.telephony
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.media.AudioAttributes
+import android.media.AudioManager
 import android.media.RingtoneManager
 import android.telecom.Call
 import android.telecom.InCallService
@@ -22,9 +24,18 @@ class CallService: InCallService() {
         super.onCallAdded(call)
 
         if (call.state == Call.STATE_RINGING) {
-            (applicationContext as EnvelopeCallApp).callState.postValue(CallState.Ringing(call))
-            //postNotification()
+            with(applicationContext as EnvelopeCallApp) {
+                callState.postValue(CallState.Ringing(call))
+
+                if (!foregroundState) {
+                    postNotification()
+                }
+            }
         }
+    }
+
+    override fun onBringToForeground(showDialpad: Boolean) {
+        Timber.d("showDialpad: $showDialpad")
     }
 
     private val YOUR_CHANNEL_ID: String = "calls"
@@ -42,15 +53,8 @@ class CallService: InCallService() {
     }
 
     fun postNotification() {
-        val channel = NotificationChannel(YOUR_CHANNEL_ID, "Incoming Calls", NotificationManager.IMPORTANCE_MAX)
-
-        val ringtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
-        channel.setSound(ringtoneUri, AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .build()
-        )
-
+        val channel = NotificationChannel(YOUR_CHANNEL_ID, "Incoming Calls", NotificationManager.IMPORTANCE_HIGH)
+        channel.setSound(null, null)
         notificationManager.createNotificationChannel(channel)
 
         val intent = Intent(Intent.ACTION_MAIN, null)
@@ -92,6 +96,6 @@ class CallService: InCallService() {
         super.onCallRemoved(call)
         call.unregisterCallback(callback)
 
-        //removeNotification()
+        removeNotification()
     }
 }

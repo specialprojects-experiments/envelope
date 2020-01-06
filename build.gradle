@@ -37,8 +37,8 @@ buildscript {
             core: 'androidx.core:core-ktx:1.1.0',
             recyclerView: 'androidx.recyclerview:recyclerview:1.0.0',
             viewPager: 'androidx.viewpager2:viewpager2:1.0.0',
-            viewModel: [
-                    ktx: 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0',
+            lifecycle: [
+                    viewModelKtx: 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0',
                     extensions: 'androidx.lifecycle:lifecycle-extensions:2.1.0'
             ],
         ],

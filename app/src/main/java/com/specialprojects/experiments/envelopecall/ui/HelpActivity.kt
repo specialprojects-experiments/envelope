@@ -27,7 +27,7 @@ import com.specialprojects.experiments.envelopecall.ui.onboarding.OnboardingActi
 import com.specialprojects.experiments.envelopecall.ui.util.bindView
 
 class HelpActivity: AppCompatActivity() {
-    private val setuoView by bindView<TextView>(R.id.setup_screens)
+    private val setupView by bindView<TextView>(R.id.setup_screens)
     private val privacyView by bindView<TextView>(R.id.privacy)
     private val envelopeView by bindView<TextView>(R.id.making_envelope)
     private val permissionsView by bindView<TextView>(R.id.permissions)
@@ -66,7 +66,6 @@ class HelpActivity: AppCompatActivity() {
         permissionsView.movementMethod = LinkMovementMethod.getInstance()
 
         linkView.setOnClickListener {
-            stopLockTask()
             startActivity(
                 Intent(Intent.ACTION_VIEW).apply {
                     data = Uri.parse("http://www.specialprojects.studio")
@@ -74,7 +73,7 @@ class HelpActivity: AppCompatActivity() {
             )
         }
 
-        setuoView.apply {
+        setupView.apply {
             val string = SpannableString(text)
             string.setSpan(CustomClickableSpan(), 45, 49, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             text = string
@@ -115,7 +114,6 @@ class HelpActivity: AppCompatActivity() {
                         finish()
                     }
                     R.id.privacy -> {
-                        stopLockTask()
                         startActivity(
                             Intent(Intent.ACTION_VIEW).apply {
                                 data = Uri.parse("https://www.iubenda.com/privacy-policy/97790877")
@@ -123,7 +121,6 @@ class HelpActivity: AppCompatActivity() {
                         )
                     }
                     R.id.making_envelope -> {
-                        stopLockTask()
                         FileDownloader.maybeStartDownload(this,
                             PDF_URL
                         )

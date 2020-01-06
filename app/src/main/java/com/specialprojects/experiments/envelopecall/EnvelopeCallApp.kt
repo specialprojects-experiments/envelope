@@ -2,19 +2,20 @@ package com.specialprojects.experiments.envelopecall
 
 import android.app.Application
 import android.content.Context
-import android.media.SoundPool
 import android.preference.PreferenceManager
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
 import com.specialprojects.experiments.envelopecall.audio.SoundPoolHolder
 import com.specialprojects.experiments.envelopecall.prefs.BooleanPreference
 import com.specialprojects.experiments.envelopecall.prefs.LongPreference
 import com.specialprojects.experiments.envelopecall.telephony.CallState
 import timber.log.Timber
 
-class EnvelopeCallApp: Application() {
+class EnvelopeCallApp: Application(), LifecycleObserver {
     lateinit var onboardingPreference: BooleanPreference
     lateinit var usagePreference: LongPreference
     val callState = MutableLiveData<CallState>()
+
+    var foregroundState = true
 
     override fun onCreate() {
         super.onCreate()
@@ -39,6 +40,8 @@ class EnvelopeCallApp: Application() {
 
         SoundPoolHolder.init()
         SoundPoolHolder.loadSounds(this)
+
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
     }
 
     fun appendUsage(usage: Long) {
@@ -59,4 +62,13 @@ class EnvelopeCallApp: Application() {
         }
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun onAppBackgrounded() {
+        foregroundState = false
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun onAppForegrounded() {
+        foregroundState = true
+    }
 }

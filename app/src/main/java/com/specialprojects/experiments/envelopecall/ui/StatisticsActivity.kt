@@ -38,7 +38,7 @@ class StatisticsActivity: AppCompatActivity() {
 
             val hours = minutes / 60
 
-            val usageText = if (hours == 0L) "$minutes minute${if(minutes > 1) "s" else ""}" else "$hours hour${if(hours > 1) "s" else ""}"
+            val usageText = if (hours == 0L) "$minutes minute${if(minutes > 1 || minutes == 0L) "s" else ""}" else "$hours hour${if(hours > 1) "s" else ""}"
             text = getString(R.string.usage, usageText)
         }
     }
