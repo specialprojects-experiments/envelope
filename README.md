@@ -3,7 +3,7 @@
 A set of envelopes which temporarily transform your phone into a simpler, calmer device, helping you take a break away from your digital world.
 One envelope turns your phone into a very basic device which can only make and receive calls, while the other turns your phone into a photo and video camera with no screen, helping you focus on what’s in front of you.
 
-![Envelope Image](48677491947_a06fae30bc_k (1).jpg)
+![Envelope Image](48677491947_a06fae30bc_kz.jpg)
 
 Please note this currently only works on the Google Pixel 3a
 
