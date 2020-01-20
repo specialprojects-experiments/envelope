@@ -18,6 +18,6 @@ Envelope is an experimental open source Android app which is available to try ri
 
 ![Envelope Image](49413920108_e256778ce2_k.jpg)
 
-[Try the app on the Google Play Store](https://play.google.com/store/apps/details?id=com.withgoogle.experiments.unplugged)
+[Try the app on the Google Play Store](https://play.google.com/store/apps/details?id=com.specialprojects.experiments.envelopecall)
 
 [Find out even more on our site](http://specialprojects.studio/project/envelope)
