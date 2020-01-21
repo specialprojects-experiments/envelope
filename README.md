@@ -20,6 +20,8 @@ Envelope is an experimental open source Android app which is available to try ri
 
 ![Envelope Image](49413920108_e256778ce2_k.jpg)
 
+[Download the DIY envelope pdf for the Pixel 3a](https://github.com/specialprojects-experiments/envelope/blob/master/google-unplugged-envelope-instructions.pdf)
+
 [Try the app on the Google Play Store](https://play.google.com/store/apps/details?id=com.specialprojects.experiments.envelopecall)
 
 [Find out even more on our site](http://specialprojects.studio/project/envelope)
